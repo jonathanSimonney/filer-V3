@@ -1,0 +1,59 @@
+{% include 'inc/head.html.twig' %}
+    <body>
+
+        {% include 'inc/header.html.twig' with {'location': location} %}
+
+        <div class="creationSpace">
+            <div class="creationButtons">
+                <button id="upload">upload file</button>
+                <button id="folder">create folder</button>
+            </div>
+
+            <form class="toHide uploadForm" action="?action=upload" method="post" enctype="multipart/form-data" name="uploadFile">
+                <div class="centeredChild">
+                    <input type="file" name="file">
+                    <br>
+                    <label for="fileName">name : </label>
+                    <input id="fileName" type="text" name="name" placeholder="type here the name of your file"><br>
+                    <input type="submit" id="uploadFile">
+                </div>
+            </form>
+
+            <form class="toHide addFolder" action="?action=add_folder" method="post"  name="addFolder">
+                <div class="centeredChild">
+                    <!--<input type="file" name="file" webkitdirectory directory multiple>
+                    <br> POSSIBLY USEFUL IF IMPLEMENT A DIRECT UPLOAD OF FOLDER.-->
+                    <label for="folderName">name : </label>
+                    <input id="folderName" type="text" name="name" placeholder="type here the name of your folder"><br>
+                    <input type="submit" id="addFolder">
+                </div>
+            </form>
+
+            <!--TODO give better style for these two forms. No time right now.-->
+
+            <p id="message" class="message red">
+                <?php echo $_SESSION['errorMessage'] ?>
+            </p>
+        </div>
+
+        <script src="assets/JS/dragAndDropHandler.js"></script>
+        <script src="assets/JS/fileFunctions.js"></script>
+        <script src="assets/JS/files.js"></script>
+
+        <div class='centeringDiv blueBackground'>
+            <div class='listFilesUser'>
+                {% if arrayElement is defined %}
+                    {% set numberForId = 0 %}
+                    {% for key, element in arrayElement %}
+                        {% set numberForId = numberForId + 1 %}
+                        {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
+                            {% include 'inc/folder.html.twig' with {'folder':element} %}
+                        {% else %}
+                            {% include 'inc/file.html.twig' with {'file':element} %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

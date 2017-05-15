@@ -1,0 +1,261 @@
+h1{
+    margin : auto;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.header nav{
+    display: flex;
+    flex-direction: row;
+    width: 40vw;
+    justify-content: space-between;
+    z-index:50;
+}
+
+a:not(.download){
+    font-size: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+form input{
+    width: 100%;
+}
+
+.message{
+    font-weight: bold;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}
+
+.blueBackground{
+    background-color: #34495e;
+}
+
+.toHide{
+    height:0;
+    opacity:0;
+    z-index:-1;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.atExtremityContent{
+    display: flex;
+    justify-content: space-between;
+}
+
+.centeringDiv{
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+}
+
+.centeringDiv>div{
+    width: 70%;
+}
+
+.centeringDiv:not(.header)>div{
+    padding-bottom: 100px;
+}
+
+.listFilesUser{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+
+.listFilesUser>div{
+    width: 200px;
+    height: 150px;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+
+.name{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+}
+
+.creationSpace{
+    min-height:50vh;
+    margin: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.creationButtons{
+    height:4vh;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+
+.creationSpace>form{
+    min-height:20vh;
+    display: flex;
+    margin:3vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.creationSpace>form.appearingSlowly{
+    display: flex;
+}
+
+.creationSpace>form>div{
+    padding:5px;
+    border:2px groove threedface;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.creationSpace>form>div>label{
+    align-self:flex-start;
+}
+
+.notForUser{
+    display: none;
+    opacity: 0;/*I'D ALMOST CONSIDER USING !important! for this, so,
+	DO NOT ALLOW USER TO SEE THIS BLOCK (obviously, he can see it through html,
+	but there is security against this)*/
+}
+
+/*TODO : change animation (also in js to change name)*/
+@keyframes appearingSlowly{
+    0%{height: 0;
+        display: block;}
+    100%{opacity: 1;
+        height:100%;}
+}
+
+.appearingSlowly{
+    animation-name: appearingSlowly;
+    animation-duration: 1s;
+    opacity: 1;
+    z-index:1;
+    display: block;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.folder.dragover{
+    position: relative;
+}
+
+.folder.dragover>*:not(.download){
+    visibility: hidden;
+}
+
+.folder.dragover a{
+    visibility: visible;
+    font-size: 90px;
+    height: 100%;
+    width : 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+
+.header{
+    position: fixed;
+    top:0;
+}
+
+body>*:nth-child(2){
+    margin-top: 12vh;
+}
+
+.precedent.dragover{
+    color:white;
+}
+
+.fullScreen{
+    background-color: rgba(224, 230, 227, 0.9);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullScreen>div{
+    height: 90vh;
+    width:70vw;
+    border: 2px #5e4126 dotted;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.fullScreen>div>p{
+    overflow:auto;
+    height:80vh;
+    background-color: #fff;
+}
+
+.fullScreen>div>p>pre{
+    width:99%;
+    height:99%;
+    margin:auto;
+}
+
+.changeAllowed>pre{
+    border:1px solid #5679ff;
+}
+
+.closeButton {
+    color: black;
+    font-size: 40px;
+    cursor: pointer;
+    position: fixed;
+    font-family: 'X-font';
+    top: 0;
+    right: 0;
+    padding: 10px 10px 0 0;
+}
+
+.fa-folder{
+    color: #dcdc00;
+}
+
+.closeButton:hover {
+    color: silver;
+}
