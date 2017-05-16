@@ -16,11 +16,11 @@ function asynchronousTreatment(path,params){
 
 
 window.onload = function(){
-	var buttonDisplay = document.getElementById('buttonDisplay');
+	/*var buttonDisplay = document.getElementById('buttonDisplay');
 	buttonDisplay.onclick = function(){
 		var toDisplay = document.getElementsByTagName('form')[0];
 		toDisplay.className = "appearingSlowly";
-	};
+	};*/
 
 	var form = document.forms["connect"];
 	form.onsubmit = function(){

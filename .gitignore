@@ -2,3 +2,4 @@
 !/uploads/.gitkeep
 .idea
 config/private.php
+/node_modules

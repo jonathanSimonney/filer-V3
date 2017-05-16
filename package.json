@@ -1,0 +1,24 @@
+{
+  "name": "filer",
+  "version": "1.0.0",
+  "description": "launch index.php each time.\r You'll need to create your own private.php file, and within it,\r  put the following line : <br>$db_config = [<br>\r                             'name' => 'YOUR_DB_NAME',<br>\r                             'host' => 'YOUR_HOST',<br>\r                             'user' => 'YOUR_ADMIN_USERNAME',<br>\r                             'pass' => 'YOUR_ADMIN_PASSWORD'<br>\r                         ];",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanSimonney/filer-V3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanSimonney/filer-V3/issues"
+  },
+  "homepage": "https://github.com/jonathanSimonney/filer-V3#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

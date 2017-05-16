@@ -1,19 +1,18 @@
 {%  include 'inc/head.html.twig' %}
     <body>
         {%  include 'inc/header.html.twig' %}
-        <button id="buttonDisplay">log in</button>
-        <br><br>
-
-        <form name="connect" method="POST" action="logIn.php" class="toHide">
-            <fieldset>
-                <label for="username">username</label>
-                <input type="text" name="username" id="username" placeholder="username">
+        <div id="login_container">
+            <form name="connect" method="POST" action="logIn.php" class="toHide">
+                <label for="username">username :</label>
+                <input type="text" name="username" id="username" class="register_input" placeholder="username">
                 <label for="password">password : </label>
-                <input type="password" name="password" id="password" placeholder="*******">
+                <input type="password" name="password" id="password" class="register_input" placeholder="*******">
                 <br>
-                <button>Send</button>
-            </fieldset>
-        </form>
+                <button class="login register_input">LOGIN</button>
+            </form>
+        </div>
+
+
 
         <p id="message" class="message red">
             <?php echo $_SESSION['errorMessage'];?>
