@@ -4,7 +4,7 @@ $grey2: #cfd8dc;
 $greymedium: #b5bec2;
 $lightgrey:#e9ebec;
 $white: #eff1f3;
-$orangebrick: #e2400a;
+$orangebrick: #d43a0a;
 $orange: #ff4c0a;
 $lightblue: #00e5ff;
 
@@ -13,17 +13,8 @@ $lightblue: #00e5ff;
     src: url("fonts/Roboto/Roboto-Medium.ttf");
 }
 
-html{
-    height: 100vh;
-}
-body{
-    height: 100vh;
-    margin: 0;
-    background-color: $grey2;
-    font-family: roboto;
-}
-p{
-    margin: 0;
+p, h5{
+    margin: 0 !important;
 }
 a{
     color: $lightgrey;
@@ -31,538 +22,845 @@ a{
 
 //REGISTER PAGE
 
-#register_container{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    background-color: $grey;
-
-    form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        height: 600px;
-        padding: 40px;
-        background-color: $dark;
-
-        .register_error{
-            color: $orange;
-        }
-
-        label{
-            font-size: 20px;
-            margin: 5px;
-        }
-
-        input, button{
-            width: 70%;
-            height: 40px;
-            margin-bottom: 10px;
-            border: 0;
-            border-radius: 3px;
-            font-size: 17px;
-            text-align: center;
-            box-shadow: 4px 5px 0px #1b1b1b;
-            font-family: roboto;
-        }
-
-        input::-webkit-input-placeholder{
-            color: #8198a1;
-        }
-
-        .register_input{
-            background-color: $lightgrey;
-        }
-
-        #register{
-            margin-top: 20px;
-            background-color: $orange;
-            color: #fff;
-            font-weight: bold;
-        }
-        #register:hover{
-            margin-left: 4px;
-            box-shadow: 0 0;
-            cursor: pointer;
-        }
-
-        #loader {
-            visibility: hidden;
-            border: 4px solid $lightgrey;
-            border-top-color: $orange;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            -webkit-animation: spin 0.8s linear infinite;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    }
-}
-
-
-
-//LOGIN PAGE
-
-#login_container{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    background-color: $grey;
-
-    form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 30%;
-        height: 300px;
-        padding: 20px;
-        background-color: $dark;
-
-        #login_error{
-            color: $orange;
-        }
-
-        label{
-            font-size: 20px;
-            margin: 5px;
-        }
-
-        input, button{
-            width: 70%;
-            height: 40px;
-            margin-bottom: 10px;
-            border: 0;
-            border-radius: 3px;
-            font-size: 17px;
-            text-align: center;
-            box-shadow: 4px 5px 0px #1b1b1b;
-            font-family: roboto;
-        }
-
-        input::-webkit-input-placeholder{
-            color: #8198a1;
-        }
-
-        .login_input{
-            background-color: $lightgrey;
-        }
-
-        .login{
-            margin-top: 20px;
-            background-color: $orange;
-            color: #fff;
-            font-weight: bold;
-        }
-        .login:hover{
-            margin-left: 4px;
-            box-shadow: 0 0;
-            cursor: pointer;
-        }
-
-        #loader {
-            visibility: hidden;
-            border: 4px solid $lightgrey;
-            border-top-color: $orange;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            -webkit-animation: spin 0.8s linear infinite;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    }
-}
-
-
-
-//HOME PAGE
-
-#main{
+html{
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 
-    header{
-        display: flex;
-        justify-content: flex-end;
-        height: 80px;
-        background-color: $grey;
-        z-index: 1;
-        box-shadow: 0px 0px 5px #000;
+    body{
+        height: 100vh;
+        margin: 0;
+        background-color: $grey2;
+        font-family: roboto;
 
-        #header_nav{
-            width: 20%;
-            height: 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: $lightgrey;
+        header{
+            height: 4.5vh;
 
-            #profile{
+            nav{
                 display: flex;
-                align-items: center;
-                width: 50%;
+                justify-content: space-between;
+                background-color: $dark;
+                box-shadow: 0px 0px 5px #000;
 
-                img{
-                    margin-right: 3%;
-                }
-            }
-
-            form{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 10%;
-                background-color: transparent;
-                border-radius: 3px;
-                border: 2px solid $orange;
-                color: $orange;
-                padding: 5px;
-
-                #logout_icon_hover{
-                    display: none;
+                .navbar-brand{
+                    margin: 0 30px 0 0;
                 }
 
-                input[type=submit]{
-                    font-size: 0.8rem;
-                    font-weight: bold;
-                    background-color: transparent;
-                    border: none;
-                    color: inherit;
-                }
-                input:hover{
-                    cursor: inherit;
-                }
-            }
-            form:hover{
-                background-color: $orange;
-                color: $white;
-                cursor: pointer;
+                div{
 
-                #logout_icon{
-                    display: none;
-                }
-
-                #logout_icon_hover{
-                    display: block;
-                }
-            }
-        }
-    }
-    #main_container{
-        display: flex;
-        flex: 1;
-
-        #sidebar{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 18%;
-            background-color: $dark;
-
-            #new_menu{
-                width: 75%;
-            }
-            #new_button{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 40px;
-                margin-top: 30px;
-                color: #fff;
-                background-color: $orange;
-                border: 2px solid $orange;
-                border-radius: 3px;
-                font-weight: bold;
-            }
-            #new_button:hover{
-                border: 2px solid $dark;
-                cursor: pointer;
-            }
-
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                min-width: 13.5%;
-                overflow: auto;
-                z-index: 1;
-
-                #form_upload{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: 40px;
-                    color: $dark;
-                    background-color: $lightgrey;
-
-                    label {
+                    .nav_collapse_content{
                         display: flex;
-                        justify-content: center;
+                        justify-content: space-between;
                         align-items: center;
-                        width: 100%;
-                        height: 100%;
-                        cursor: pointer;
+                        width: 85%;
+                        margin: auto;
 
-                        svg {
-                            width: 1em;
-                            height: 1em;
-                            vertical-align: middle;
-                            fill: currentColor;
-                            margin-top: -0.25em;
-                            margin-right: 0.25em;
-                        }
-                    }
-
-                    #create_folder{
-                        margin-right: 5px;
-                    }
-                }
-                #form_upload:hover{
-                    background-color: $greymedium;
-                    cursor: pointer;
-                }
-            }
-
-            .show {
-                display: flex;
-                flex-direction: column;
-            }
-
-            #file_upload{
-                display: none;
-            }
-
-            #folder_upload{
-                display: none;
-            }
-
-
-
-            #tree{
-                display: flex;
-                width: 100%;
-                margin-top: 20px;
-                color: #fff;
-
-                .nav{
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    padding: 13px 0 13px 12.5%;
-
-                    .nav_icon{
-                        width: 25px;
-                        height: 25px;
-                        padding-right: 15px;
-                    }
-
-                    p{
-                        margin-right: 10px;
-                    }
-
-                    .triangle2{
-                        display: none;
-                    }
-                }
-                .nav:hover, .nav:active{
-                    background-color: $grey;
-                    border-right: 5px solid $orange;
-                    cursor: pointer;
-
-                    .triangle{
-                        display: none;
-                    }
-
-                    .triangle2{
-                        display: block;
-                    }
-                }
-            }
-        }
-
-        #main_content{
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1%;
-
-            #file_table{
-                width: 90%;
-                display: flex;
-                border-radius: 3px;
-                background-color: $white;
-
-                table{
-                    width: 100%;
-                    border: none;
-                    border-collapse: collapse;
-
-                    tbody{
-                        #header_table{
-                            border-bottom: 2px solid $grey2;
+                        .welcome_text{
+                            font-size: 18px;
+                            color: $lightblue;
                         }
 
-                        tr{
-                            th{
-                                text-align: left;
+
+                        ul{
+                            display: flex;
+                            margin: auto;
+
+                            li{
                                 padding: 7px;
-                                border-bottom: 2px solid $grey;
-                            }
+                                font-size: 18px;
+                                color: $white;
+                                a{
+                                    i{
 
-                            .rename_form{
-                                display: flex;
-                            }
-
-                            .rename_input{
-                                font-family: roboto;
-                                border: none;
-                                background-color: transparent;
-                            }
-
-                            .rename_ok{
-                                width: 30px;
-                                height: 20px;
-                                font-family: roboto;
-                                margin-left: 20%;
-                                border: none;
-                                background-color: $grey2;
-                            }
-                            .rename_ok:hover{
-                                background-color: #c3ccd0;
-                                cursor: pointer;
-                            }
-
-                            td{
-                                padding: 5px;
-
-                                .file{
-                                    margin-left: 5px;
-                                    margin-right: 15px;
+                                        margin: 0 10px;
+                                    }
+                                    color: $white;
+                                }
+                                a:hover{
+                                    text-decoration: none;
+                                    color: $orange;
+                                    transition: 0.5s;
                                 }
 
-                                label:hover{
-                                    cursor: pointer;
-                                }
-
-                                .label_hover{
+                                form{
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
-                                    width: 33px;
-                                    height: 33px;
+                                    margin-right: 10%;
                                     background-color: transparent;
-                                    border-radius: 50%;
-                                }
+                                    color: $greymedium;
+                                    padding: 5px;
 
-                                .label_hover:hover{
-                                    background-color: #c3ccd0;
-                                }
-
-                                .input__profile{
-                                    display: none;
-                                }
-
-                                .delete_form{
+                                    .fa-power-off{
+                                        margin: 0 0 0 10px;
+                                    }
 
                                     input[type=submit]{
-                                        display: none;
+                                        font-weight: bold;
+                                        background-color: transparent;
+                                        border: none;
+                                        color: inherit;
+                                    }
+                                    input:hover{
+                                        cursor: inherit;
                                     }
                                 }
-
-                                .replace{
-                                    display: none;
+                                form:hover{
+                                    color: $white;
+                                    cursor: pointer;
+                                    transition: 0.5s;
                                 }
                             }
                         }
-                        tr:not(:first-of-type):hover{
+                    }
+                }
+            }
+        }
+        #main_container{
+            min-height: 95.5vh;
+
+            #register_container{
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                background-color: $grey2;
+                padding: 40px 0;
+
+                .row{
+                    width: 100%;
+
+                    .col-12{
+                        .error_message{
+                            margin: 10px 0;
+                            color: $orangebrick;
+                        }
+
+                        form{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 40px 0;
+                            background-color: $dark;
+
+                            label{
+                                font-size: 20px;
+                                margin: 5px;
+                            }
+
+                            input, button{
+                                width: 80%;
+                                height: 40px;
+                                margin-bottom: 10px;
+                                border: 0;
+                                border-radius: 3px;
+                                font-size: 17px;
+                                text-align: center;
+                                box-shadow: 4px 5px 0px #1b1b1b;
+                                font-family: roboto;
+                            }
+
+                            input::-webkit-input-placeholder{
+                                color: #8198a1;
+                            }
+
+                            .register_input{
+                                background-color: $lightgrey;
+                            }
+
+                            #register{
+                                margin-top: 20px;
+                                background-color: $orange;
+                                color: #fff;
+                                font-weight: bold;
+                            }
+                            #register:hover{
+                                margin-left: 4px;
+                                box-shadow: 0 0;
+                                cursor: pointer;
+                            }
+
+                            #loader {
+                                visibility: hidden;
+                                border: 4px solid $lightgrey;
+                                border-top-color: $orange;
+                                border-radius: 50%;
+                                width: 30px;
+                                height: 30px;
+                                -webkit-animation: spin 0.8s linear infinite;
+                                animation: spin 0.8s linear infinite;
+                            }
+
+                            @-webkit-keyframes spin {
+                                0% { -webkit-transform: rotate(0deg); }
+                                100% { -webkit-transform: rotate(360deg); }
+                            }
+
+                            @keyframes spin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            //LOGIN PAGE
+
+            #login_container{
+                height: 85vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                background-color: $grey2;
+
+                .row{
+                    width: 100%;
+
+                    .col-12{
+                        .error_message{
+                            margin: 10px 0;
+                            color: $orangebrick;
+                            word-wrap: break-word   ;
+                        }
+
+                        form{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            height: 300px;
+                            padding: 20px;
+                            background-color: $dark;
+
+                            #login_error{
+                                color: $orange;
+                            }
+
+                            label{
+                                font-size: 20px;
+                                margin: 5px;
+                            }
+
+                            input, button{
+                                width: 70%;
+                                height: 40px;
+                                margin-bottom: 10px;
+                                border: 0;
+                                border-radius: 3px;
+                                font-size: 17px;
+                                text-align: center;
+                                box-shadow: 4px 5px 0px #1b1b1b;
+                                font-family: roboto;
+                            }
+
+                            input::-webkit-input-placeholder{
+                                color: #8198a1;
+                            }
+
+                            .login_input{
+                                background-color: $lightgrey;
+                            }
+
+                            .login{
+                                margin-top: 20px;
+                                background-color: $orange;
+                                color: #fff;
+                                font-weight: bold;
+                            }
+                            .login:hover{
+                                margin-left: 4px;
+                                box-shadow: 0 0;
+                                cursor: pointer;
+                            }
+
+                            #loader {
+                                visibility: hidden;
+                                border: 4px solid $lightgrey;
+                                border-top-color: $orange;
+                                border-radius: 50%;
+                                width: 30px;
+                                height: 30px;
+                                -webkit-animation: spin 0.8s linear infinite;
+                                animation: spin 0.8s linear infinite;
+                            }
+
+                            @-webkit-keyframes spin {
+                                0% { -webkit-transform: rotate(0deg); }
+                                100% { -webkit-transform: rotate(360deg); }
+                            }
+
+                            @keyframes spin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            //HOME PAGE
+            .home_container_mobile{
+                width: 100%;
+                min-height: 95.5vh;
+                display: flex;
+                flex-direction: column;
+
+                .sidebar{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $grey;
+
+                    .new_menu{
+                        width: 50%;
+                        margin: 10px 0 20px 0;
+
+                        #new_button{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 40px;
+                            margin-top: 30px;
+                            color: #fff;
+                            background-color: $orange;
+                            border: 2px solid $orange;
+                            border-radius: 3px;
+                            font-weight: bold;
+                        }
+                        #new_button:hover{
+                            border: 2px solid $grey;
+                            cursor: pointer;
+                            outline: 0;
+                        }
+                    }
+
+                    .dropdown-content {
+                        display: none;
+                        position: absolute;
+                        min-width: 50%;
+                        overflow: auto;
+                        z-index: 1;
+
+                        #form_upload{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 50px;
+                            color: $dark;
                             background-color: $lightgrey;
+
+                            label {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                height: 100%;
+                                margin: 0;
+                                cursor: pointer;
+
+                                i{
+                                    margin: 0 5px;
+                                }
+                            }
+
+                            #create_folder{
+                                margin-right: 5px;
+                            }
+                        }
+                        #form_upload:hover{
+                            background-color: $greymedium;
                             cursor: pointer;
                         }
+                    }
 
-                        .row:not(:last-of-type){
-                            border-bottom: 2px solid $greymedium;
+                    .show {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    #file_upload{
+                        display: none;
+                    }
+
+                    #folder_upload{
+                        display: none;
+                    }
+                }
+
+                .main_content{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 1%;
+
+                    .file_table{
+                        width: 90%;
+                        display: flex;
+                        border-radius: 3px;
+                        background-color: $white;
+
+                        table{
+                            width: 100%;
+                            border: none;
+                            border-collapse: collapse;
+
+                            tbody{
+                                #header_table{
+                                    border-bottom: 2px solid $grey2;
+                                }
+
+                                tr{
+                                    th{
+                                        text-align: left;
+                                        padding: 7px;
+                                        border-bottom: 2px solid $grey;
+                                    }
+
+                                    .rename_form{
+                                        display: flex;
+                                    }
+
+                                    .rename_input{
+                                        font-family: roboto;
+                                        border: none;
+                                        background-color: transparent;
+                                    }
+
+                                    .rename_ok{
+                                        width: 30px;
+                                        height: 20px;
+                                        font-family: roboto;
+                                        margin-left: 20%;
+                                        border: none;
+                                        background-color: $grey2;
+                                    }
+                                    .rename_ok:hover{
+                                        background-color: #c3ccd0;
+                                        cursor: pointer;
+                                    }
+
+                                    td{
+                                        padding: 5px;
+
+                                        .file{
+                                            margin-left: 5px;
+                                            margin-right: 15px;
+                                        }
+
+                                        label:hover{
+                                            cursor: pointer;
+                                        }
+
+                                        .label_hover{
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            width: 33px;
+                                            height: 33px;
+                                            background-color: transparent;
+                                            border-radius: 50%;
+                                        }
+
+                                        .label_hover:hover{
+                                            background-color: #c3ccd0;
+                                        }
+
+                                        .input__profile{
+                                            display: none;
+                                        }
+
+                                        .delete_form{
+
+                                            input[type=submit]{
+                                                display: none;
+                                            }
+                                        }
+
+                                        .replace{
+                                            display: none;
+                                        }
+                                    }
+                                }
+                                tr:not(:first-of-type):hover{
+                                    background-color: $lightgrey;
+                                    cursor: pointer;
+                                }
+
+                                .row:not(:last-of-type){
+                                    border-bottom: 2px solid $greymedium;
+                                }
+
+                            }
                         }
-
                     }
+
+                    .modal {
+                        display: none;
+                        position: fixed;
+                        z-index: 1;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: auto;
+                        background-color: rgb(0,0,0);
+                        background-color: rgba(0,0,0,0.4);
+
+                        .modal-content {
+                            background-color: #fefefe;
+                            margin: auto;
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 20%;
+
+                            .close {
+                                color: #aaaaaa;
+                                float: right;
+                                font-size: 28px;
+                                font-weight: bold;
+                            }
+
+                            .close:hover,
+                            .close:focus {
+                                color: #000;
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+
                 }
-            }
 
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgb(0,0,0);
-                background-color: rgba(0,0,0,0.4);
-
-                .modal-content {
-                    background-color: #fefefe;
-                    margin: auto;
-                    padding: 20px;
-                    border: 1px solid #888;
+                .infos{
+                    display: flex;
+                    flex-direction: column;
                     width: 20%;
-
-                    .close {
-                        color: #aaaaaa;
-                        float: right;
-                        font-size: 28px;
-                        font-weight: bold;
-                    }
-
-                    .close:hover,
-                    .close:focus {
-                        color: #000;
-                        text-decoration: none;
-                        cursor: pointer;
-                    }
+                    background-color: $white;
+                    margin-left: auto;
+                    border-left: 2px solid $grey2;
                 }
             }
 
+            .home_container_desktop{
+                width: 100%;
+                min-height: 95.5vh;
+                padding-top: 2vh;
+                display: flex;
 
-        }
+                .sidebar{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 18%;
+                    background-color: $grey;
 
-        #infos{
-            display: flex;
-            flex-direction: column;
-            width: 20%;
-            background-color: $white;
-            margin-left: auto;
-            border-left: 2px solid $grey2;
+                    .new_menu{
+                        width: 75%;
+                        margin: 10px 0 20px 0;
+
+                        #new_button{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 40px;
+                            margin-top: 30px;
+                            color: #fff;
+                            background-color: $orange;
+                            border: 0;
+                            border-radius: 3px;
+                            font-weight: bold;
+                        }
+                        #new_button:hover{
+                            background-color: $orangebrick;
+                            transition: 0.5s;
+                            cursor: pointer;
+                            outline: 0;
+                        }
+                    }
+
+                    .dropdown-content {
+                        display: none;
+                        position: absolute;
+                        min-width: 13.5%;
+                        z-index: 1;
+
+                        #form_upload{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 50px;
+                            color: $dark;
+                            background-color: $lightgrey;
+
+                            label {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                height: 100%;
+                                margin: 0;
+                                cursor: pointer;
+
+                                i{
+                                    margin: 0 5px;
+                                }
+                            }
+
+                            #create_folder{
+                                margin-right: 5px;
+                            }
+                        }
+                        #form_upload:hover{
+                            background-color: $greymedium;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .show {
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    #file_upload{
+                        display: none;
+                    }
+
+                    #folder_upload{
+                        display: none;
+                    }
+
+
+
+                    .tree{
+                        display: flex;
+                        width: 100%;
+                        margin-top: 20px;
+                        color: #fff;
+
+                        .nav{
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            padding: 13px 0 13px 12.5%;
+
+                            .fa-caret-right{
+                                margin: 0 5px;
+                            }
+
+                            .fa-caret-down{
+                                display: none;
+                            }
+
+                            .fa-folder{
+                                margin: 0 10px;
+                            }
+                        }
+                        .nav:hover, .nav:focus{
+                            background-color: $grey;
+                            border-right: 5px solid $orange;
+                            cursor: pointer;
+
+                            .fa-caret-right{
+                                display: none;
+                            }
+
+                            .fa-caret-down{
+                                display: block;
+                                margin: 0 5px;
+                            }
+                        }
+                    }
+                }
+
+                .main_content{
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 10px 0;
+
+                    .path{
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0 5%;
+                        margin: 15px 0;
+
+                        .fa-chevron-right{
+                            margin: 0 7px 0 3px;
+                        }
+                    }
+
+                    .file_table{
+                        width: 90%;
+                        display: flex;
+                        border-radius: 3px;
+                        background-color: $white;
+
+                        table{
+                            width: 100%;
+                            border: none;
+                            border-collapse: collapse;
+
+                            tbody{
+                                #header_table{
+                                    border-bottom: 2px solid $grey2;
+                                }
+
+                                tr{
+                                    th{
+                                        text-align: left;
+                                        padding: 7px;
+                                        border-bottom: 2px solid $grey;
+                                    }
+
+                                    .rename_form{
+                                        display: flex;
+                                    }
+
+                                    .rename_input{
+                                        font-family: roboto;
+                                        border: none;
+                                        background-color: transparent;
+                                    }
+
+                                    .rename_ok{
+                                        width: 30px;
+                                        height: 20px;
+                                        font-family: roboto;
+                                        margin-left: 20%;
+                                        border: none;
+                                        background-color: $grey2;
+                                    }
+                                    .rename_ok:hover{
+                                        background-color: #c3ccd0;
+                                        cursor: pointer;
+                                    }
+
+                                    td{
+                                        padding: 5px;
+
+                                        .file{
+                                            margin-left: 5px;
+                                            margin-right: 15px;
+                                        }
+
+                                        label:hover{
+                                            cursor: pointer;
+                                        }
+
+                                        .label_hover{
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            width: 33px;
+                                            height: 33px;
+                                            background-color: transparent;
+                                            border-radius: 50%;
+                                        }
+
+                                        .label_hover:hover{
+                                            background-color: #c3ccd0;
+                                        }
+
+                                        .input__profile{
+                                            display: none;
+                                        }
+
+                                        .delete_form{
+
+                                            input[type=submit]{
+                                                display: none;
+                                            }
+                                        }
+
+                                        .replace{
+                                            display: none;
+                                        }
+                                    }
+                                }
+                                tr:not(:first-of-type):hover{
+                                    background-color: $lightgrey;
+                                    cursor: pointer;
+                                }
+
+                                .row:not(:last-of-type){
+                                    border-bottom: 2px solid $greymedium;
+                                }
+
+                            }
+                        }
+                    }
+
+                    .modal {
+                        display: none;
+                        position: fixed;
+                        z-index: 1;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: auto;
+                        background-color: rgb(0,0,0);
+                        background-color: rgba(0,0,0,0.4);
+
+                        .modal-content {
+                            background-color: #fefefe;
+                            margin: auto;
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 20%;
+
+                            .close {
+                                color: #aaaaaa;
+                                float: right;
+                                font-size: 28px;
+                                font-weight: bold;
+                            }
+
+                            .close:hover,
+                            .close:focus {
+                                color: #000;
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+
+                }
+
+                .infos{
+                    display: flex;
+                    flex-direction: column;
+                    width: 23%;
+                    background-color: $white;
+                    margin-left: auto;
+                    border-left: 2px solid $grey2;
+                }
+            }
         }
     }
 }
+
+
+
+
+
+

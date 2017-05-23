@@ -1,23 +1,23 @@
-{%  include 'inc/head.html.twig' %}
-    <body>
-        {%  include 'inc/header.html.twig' %}
-        <div id="login_container">
-            <form name="connect" method="POST" action="logIn.php" class="toHide">
-                <label for="username">username :</label>
-                <input type="text" name="username" id="username" class="register_input" placeholder="username">
-                <label for="password">password : </label>
-                <input type="password" name="password" id="password" class="register_input" placeholder="*******">
-                <br>
-                <button class="login register_input">LOGIN</button>
-            </form>
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div id="login_container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <b id="message" class="error_message">
+                    <?php echo $_SESSION['errorMessage'];?>
+                </b>
+                <form name="connect" method="POST" action="logIn.php" class="toHide">
+                    <label for="username">Username :</label>
+                    <input type="text" name="username" id="username" class="register_input" placeholder="username">
+                    <label for="password">Password : </label>
+                    <input type="password" name="password" id="password" class="register_input" placeholder="*******">
+                    <br>
+                    <button class="login register_input">LOGIN</button>
+                </form>
+            </div>
         </div>
+    </div>
 
-
-
-        <p id="message" class="message red">
-            <?php echo $_SESSION['errorMessage'];?>
-        </p>
-
-        <script src="assets/JS/login.js"></script>
-    </body>
-</html>
+    <script src="assets/JS/login.js"></script>
+{% endblock %}

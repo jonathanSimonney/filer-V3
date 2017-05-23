@@ -1,59 +1,165 @@
-{% include 'inc/head.html.twig' %}
-    <body>
+{% extends 'layout.html.twig' %}
 
-        {% include 'inc/header.html.twig' with {'location': location} %}
-
-        <div class="creationSpace">
-            <div class="creationButtons">
-                <button id="upload">upload file</button>
-                <button id="folder">create folder</button>
-            </div>
-
-            <form class="toHide uploadForm" action="?action=upload" method="post" enctype="multipart/form-data" name="uploadFile">
-                <div class="centeredChild">
-                    <input type="file" name="file">
-                    <br>
-                    <label for="fileName">name : </label>
-                    <input id="fileName" type="text" name="name" placeholder="type here the name of your file"><br>
-                    <input type="submit" id="uploadFile">
+{% block content %}
+    <head>
+        <script src="assets/JS/script.js"></script>
+    </head>
+    <div class="home_container_mobile hidden-lg-up">
+        <div class="sidebar">
+            <div class="new_menu">
+                <button id="new_button" onclick="toggleMenu()" class="dropbtn">NEW</button>
+                <div class="myDropdown dropdown-content">
+                    <form id="form_upload" method="POST" action="?action=upload" enctype="multipart/form-data">
+                        <input type="file" name="user_file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
+                        <label for="file_upload"><i class="fa fa-upload"></i><span>Upload a file</span></label>
+                    </form>
+                    <form id="form_upload" method="POST" action="?action=folder" enctype="multipart/form-data">
+                        <button name="user_file" id="folder_upload" class="inputfile inputfile-1"></button>
+                        <label for="folder_upload"><i class="fa fa-folder"></i><span>Create a folder</span></label>
+                    </form>
                 </div>
-            </form>
-
-            <form class="toHide addFolder" action="?action=add_folder" method="post"  name="addFolder">
-                <div class="centeredChild">
-                    <!--<input type="file" name="file" webkitdirectory directory multiple>
-                    <br> POSSIBLY USEFUL IF IMPLEMENT A DIRECT UPLOAD OF FOLDER.-->
-                    <label for="folderName">name : </label>
-                    <input id="folderName" type="text" name="name" placeholder="type here the name of your folder"><br>
-                    <input type="submit" id="addFolder">
-                </div>
-            </form>
-
-            <!--TODO give better style for these two forms. No time right now.-->
-
-            <p id="message" class="message red">
-                <?php echo $_SESSION['errorMessage'] ?>
-            </p>
-        </div>
-
-        <script src="assets/JS/dragAndDropHandler.js"></script>
-        <script src="assets/JS/fileFunctions.js"></script>
-        <script src="assets/JS/files.js"></script>
-
-        <div class='centeringDiv blueBackground'>
-            <div class='listFilesUser'>
-                {% if arrayElement is defined %}
-                    {% set numberForId = 0 %}
-                    {% for key, element in arrayElement %}
-                        {% set numberForId = numberForId + 1 %}
-                        {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
-                            {% include 'inc/folder.html.twig' with {'folder':element} %}
-                        {% else %}
-                            {% include 'inc/file.html.twig' with {'file':element} %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
-    </body>
-</html>
+        <div class="main_content">
+            <div class="path"></div>
+            <div id="file_table">
+                <table>
+                    <tr id="header_table">
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th colspan="5">Options</th>
+                    </tr>
+                    <?php
+                display_action();
+                ?>
+                </table>
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+        </div>
+        <div class="infos">
+        </div>
+    </div>
+
+    <div class="home_container_desktop hidden-md-down">
+        <div class="sidebar">
+            <div class="new_menu">
+                <button id="new_button" onclick="toggleMenu()" class="dropbtn">NEW</button>
+                <div class="myDropdown dropdown-content">
+                    <form id="form_upload" method="POST" action="?action=upload" enctype="multipart/form-data">
+                        <input type="file" name="user_file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
+                        <label for="file_upload"><i class="fa fa-upload"></i><span>Upload a file</span></label>
+                    </form>
+                    <form id="form_upload" method="POST" action="?action=folder" enctype="multipart/form-data">
+                        <button name="user_file" id="folder_upload" class="inputfile inputfile-1"></button>
+                        <label for="folder_upload"><i class="fa fa-folder"></i><span>Create a folder</span></label>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tree">
+                <div class="nav">
+                    <i class="fa fa-caret-right"></i>
+                    <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-folder"></i>
+                    <p>Main</p>
+                </div>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="path">
+                <h5>current path</h5>
+                <i class="fa fa-chevron-right"></i>
+                <h5>...</h5>
+            </div>
+            <div class="file_table">
+                <table>
+                    <tr id="header_table">
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th colspan="5">Options</th>
+                    </tr>
+                    <?php
+                display_action();
+                ?>
+                </table>
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="infos">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="creationSpace">
+        <div class="creationButtons">
+            <button id="upload">upload file</button>
+            <button id="folder">create folder</button>
+        </div>
+
+        <form class="toHide uploadForm" action="?action=upload" method="post" enctype="multipart/form-data" name="uploadFile">
+            <div class="centeredChild">
+                <input type="file" name="file">
+                <br>
+                <label for="fileName">name : </label>
+                <input id="fileName" type="text" name="name" placeholder="type here the name of your file"><br>
+                <input type="submit" id="uploadFile">
+            </div>
+        </form>
+
+        <form class="toHide addFolder" action="?action=add_folder" method="post"  name="addFolder">
+            <div class="centeredChild">
+                <!--<input type="file" name="file" webkitdirectory directory multiple>
+                <br> POSSIBLY USEFUL IF IMPLEMENT A DIRECT UPLOAD OF FOLDER.-->
+                <label for="folderName">name : </label>
+                <input id="folderName" type="text" name="name" placeholder="type here the name of your folder"><br>
+                <input type="submit" id="addFolder">
+            </div>
+        </form>
+
+        <!--TODO give better style for these two forms. No time right now.-->
+
+        <p id="message" class="message red">
+            <?php echo $_SESSION['errorMessage'] ?>
+        </p>
+    </div>
+
+    <script src="assets/JS/dragAndDropHandler.js"></script>
+    <script src="assets/JS/fileFunctions.js"></script>
+    <script src="assets/JS/files.js"></script>
+
+    <div class='centeringDiv blueBackground'>
+        <div class='listFilesUser'>
+            {% if arrayElement is defined %}
+                {% set numberForId = 0 %}
+                {% for key, element in arrayElement %}
+                    {% set numberForId = numberForId + 1 %}
+                    {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
+                        {% include 'inc/folder.html.twig' with {'folder':element} %}
+                    {% else %}
+                        {% include 'inc/file.html.twig' with {'file':element} %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
