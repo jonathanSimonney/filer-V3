@@ -1,4 +1,7 @@
+logs/*
+!logs/.htaccess
 /uploads/*
+vendor/*
 !/uploads/.gitkeep
 .idea
 config/private.php
