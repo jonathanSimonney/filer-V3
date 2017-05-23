@@ -1,33 +1,29 @@
 {% include 'inc/head.html.twig' %}
     <body>
         {% include 'inc/header.html.twig' %}
-        <form name="signUp" method="POST" action="register.php">
-            <fieldset>
-                <label for="username">login : </label>
-                <input type="text" name="username" id="username" placeholder="login"><br>
+        <div id="register_container">
+            <form name="signUp" method="POST" action="register.php">
+                <label for="username">Login : </label>
+                <input type="text" name="username" id="username" class="register_input" placeholder="login"><br>
 
-                <label for="email">email : </label>
-                <input type="email" name="email" id="email" placeholder="xyz@example.com"><br>
+                <label for="email">Email : </label>
+                <input type="email" name="email" id="email" class="register_input" placeholder="xyz@example.com"><br>
 
-                <label for="password">password : </label>
-                <input type="password" name="password" id="password" placeholder="password">
+                <label for="password">Password : </label>
+                <input type="password" name="password" id="password" class="register_input" placeholder="*******">
                 <br>
 
-                <label for="confirmationOfPassword">confirm your password : </label>
-                <input type="password" name="confirmationOfPassword" id="confirmationOfPassword" placeholder="confirm your password"><!--BONUS : add button show password -->
+                <label for="confirmationOfPassword">Confirm your password : </label>
+                <input type="password" name="confirmationOfPassword" id="confirmationOfPassword" class="register_input" placeholder="confirm your password"><!--BONUS : add button show password -->
                 <br>
 
-                <label for="indic">password indication</label>
-                <input type="text" name="indic" id="indic" placeholder="this will be displayed if you don't remember your password"><br>
+                <label for="indic">Password indication</label>
+                <input type="text" name="indic" id="indic" class="register_input" placeholder="this will be displayed if you don't remember your password"><br>
                 <!--TODO : include capcha if have time-->
-                <button>send</button>
-            </fieldset>
-        </form>
-
-
-        <p id='message'></p>
-
-
+                <button id="register" class="register_input">SEND</button>
+            </form>
+            <p id='message' class="register_error"></p>
+        </div>
 
 
         <script type="text/javascript" src="assets/JS/signUpScript.js"></script>

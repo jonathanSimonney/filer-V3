@@ -1,0 +1,568 @@
+$dark: #212a2f;
+$grey: #364851;
+$grey2: #cfd8dc;
+$greymedium: #b5bec2;
+$lightgrey:#e9ebec;
+$white: #eff1f3;
+$orangebrick: #e2400a;
+$orange: #ff4c0a;
+$lightblue: #00e5ff;
+
+@font-face {
+    font-family: roboto;
+    src: url("fonts/Roboto/Roboto-Medium.ttf");
+}
+
+html{
+    height: 100vh;
+}
+body{
+    height: 100vh;
+    margin: 0;
+    background-color: $grey2;
+    font-family: roboto;
+}
+p{
+    margin: 0;
+}
+a{
+    color: $lightgrey;
+}
+
+//REGISTER PAGE
+
+#register_container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: $grey;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 600px;
+        padding: 40px;
+        background-color: $dark;
+
+        .register_error{
+            color: $orange;
+        }
+
+        label{
+            font-size: 20px;
+            margin: 5px;
+        }
+
+        input, button{
+            width: 70%;
+            height: 40px;
+            margin-bottom: 10px;
+            border: 0;
+            border-radius: 3px;
+            font-size: 17px;
+            text-align: center;
+            box-shadow: 4px 5px 0px #1b1b1b;
+            font-family: roboto;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #8198a1;
+        }
+
+        .register_input{
+            background-color: $lightgrey;
+        }
+
+        #register{
+            margin-top: 20px;
+            background-color: $orange;
+            color: #fff;
+            font-weight: bold;
+        }
+        #register:hover{
+            margin-left: 4px;
+            box-shadow: 0 0;
+            cursor: pointer;
+        }
+
+        #loader {
+            visibility: hidden;
+            border: 4px solid $lightgrey;
+            border-top-color: $orange;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            -webkit-animation: spin 0.8s linear infinite;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    }
+}
+
+
+
+//LOGIN PAGE
+
+#login_container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: $grey;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        height: 300px;
+        padding: 20px;
+        background-color: $dark;
+
+        #login_error{
+            color: $orange;
+        }
+
+        label{
+            font-size: 20px;
+            margin: 5px;
+        }
+
+        input, button{
+            width: 70%;
+            height: 40px;
+            margin-bottom: 10px;
+            border: 0;
+            border-radius: 3px;
+            font-size: 17px;
+            text-align: center;
+            box-shadow: 4px 5px 0px #1b1b1b;
+            font-family: roboto;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #8198a1;
+        }
+
+        .login_input{
+            background-color: $lightgrey;
+        }
+
+        .login{
+            margin-top: 20px;
+            background-color: $orange;
+            color: #fff;
+            font-weight: bold;
+        }
+        .login:hover{
+            margin-left: 4px;
+            box-shadow: 0 0;
+            cursor: pointer;
+        }
+
+        #loader {
+            visibility: hidden;
+            border: 4px solid $lightgrey;
+            border-top-color: $orange;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            -webkit-animation: spin 0.8s linear infinite;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    }
+}
+
+
+
+//HOME PAGE
+
+#main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    header{
+        display: flex;
+        justify-content: flex-end;
+        height: 80px;
+        background-color: $grey;
+        z-index: 1;
+        box-shadow: 0px 0px 5px #000;
+
+        #header_nav{
+            width: 20%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $lightgrey;
+
+            #profile{
+                display: flex;
+                align-items: center;
+                width: 50%;
+
+                img{
+                    margin-right: 3%;
+                }
+            }
+
+            form{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 10%;
+                background-color: transparent;
+                border-radius: 3px;
+                border: 2px solid $orange;
+                color: $orange;
+                padding: 5px;
+
+                #logout_icon_hover{
+                    display: none;
+                }
+
+                input[type=submit]{
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    background-color: transparent;
+                    border: none;
+                    color: inherit;
+                }
+                input:hover{
+                    cursor: inherit;
+                }
+            }
+            form:hover{
+                background-color: $orange;
+                color: $white;
+                cursor: pointer;
+
+                #logout_icon{
+                    display: none;
+                }
+
+                #logout_icon_hover{
+                    display: block;
+                }
+            }
+        }
+    }
+    #main_container{
+        display: flex;
+        flex: 1;
+
+        #sidebar{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+            background-color: $dark;
+
+            #new_menu{
+                width: 75%;
+            }
+            #new_button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 40px;
+                margin-top: 30px;
+                color: #fff;
+                background-color: $orange;
+                border: 2px solid $orange;
+                border-radius: 3px;
+                font-weight: bold;
+            }
+            #new_button:hover{
+                border: 2px solid $dark;
+                cursor: pointer;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                min-width: 13.5%;
+                overflow: auto;
+                z-index: 1;
+
+                #form_upload{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 40px;
+                    color: $dark;
+                    background-color: $lightgrey;
+
+                    label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        cursor: pointer;
+
+                        svg {
+                            width: 1em;
+                            height: 1em;
+                            vertical-align: middle;
+                            fill: currentColor;
+                            margin-top: -0.25em;
+                            margin-right: 0.25em;
+                        }
+                    }
+
+                    #create_folder{
+                        margin-right: 5px;
+                    }
+                }
+                #form_upload:hover{
+                    background-color: $greymedium;
+                    cursor: pointer;
+                }
+            }
+
+            .show {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #file_upload{
+                display: none;
+            }
+
+            #folder_upload{
+                display: none;
+            }
+
+
+
+            #tree{
+                display: flex;
+                width: 100%;
+                margin-top: 20px;
+                color: #fff;
+
+                .nav{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    padding: 13px 0 13px 12.5%;
+
+                    .nav_icon{
+                        width: 25px;
+                        height: 25px;
+                        padding-right: 15px;
+                    }
+
+                    p{
+                        margin-right: 10px;
+                    }
+
+                    .triangle2{
+                        display: none;
+                    }
+                }
+                .nav:hover, .nav:active{
+                    background-color: $grey;
+                    border-right: 5px solid $orange;
+                    cursor: pointer;
+
+                    .triangle{
+                        display: none;
+                    }
+
+                    .triangle2{
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        #main_content{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1%;
+
+            #file_table{
+                width: 90%;
+                display: flex;
+                border-radius: 3px;
+                background-color: $white;
+
+                table{
+                    width: 100%;
+                    border: none;
+                    border-collapse: collapse;
+
+                    tbody{
+                        #header_table{
+                            border-bottom: 2px solid $grey2;
+                        }
+
+                        tr{
+                            th{
+                                text-align: left;
+                                padding: 7px;
+                                border-bottom: 2px solid $grey;
+                            }
+
+                            .rename_form{
+                                display: flex;
+                            }
+
+                            .rename_input{
+                                font-family: roboto;
+                                border: none;
+                                background-color: transparent;
+                            }
+
+                            .rename_ok{
+                                width: 30px;
+                                height: 20px;
+                                font-family: roboto;
+                                margin-left: 20%;
+                                border: none;
+                                background-color: $grey2;
+                            }
+                            .rename_ok:hover{
+                                background-color: #c3ccd0;
+                                cursor: pointer;
+                            }
+
+                            td{
+                                padding: 5px;
+
+                                .file{
+                                    margin-left: 5px;
+                                    margin-right: 15px;
+                                }
+
+                                label:hover{
+                                    cursor: pointer;
+                                }
+
+                                .label_hover{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    width: 33px;
+                                    height: 33px;
+                                    background-color: transparent;
+                                    border-radius: 50%;
+                                }
+
+                                .label_hover:hover{
+                                    background-color: #c3ccd0;
+                                }
+
+                                .input__profile{
+                                    display: none;
+                                }
+
+                                .delete_form{
+
+                                    input[type=submit]{
+                                        display: none;
+                                    }
+                                }
+
+                                .replace{
+                                    display: none;
+                                }
+                            }
+                        }
+                        tr:not(:first-of-type):hover{
+                            background-color: $lightgrey;
+                            cursor: pointer;
+                        }
+
+                        .row:not(:last-of-type){
+                            border-bottom: 2px solid $greymedium;
+                        }
+
+                    }
+                }
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 20%;
+
+                    .close {
+                        color: #aaaaaa;
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                    }
+
+                    .close:hover,
+                    .close:focus {
+                        color: #000;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+        }
+
+        #infos{
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            background-color: $white;
+            margin-left: auto;
+            border-left: 2px solid $grey2;
+        }
+    }
+}

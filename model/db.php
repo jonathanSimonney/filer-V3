@@ -30,7 +30,7 @@ function get_dbh(){
 
 function db_insert($table, $data = [], $keyCorrespond = false){
     $dbh = get_dbh();
-    $query = 'INSERT INTO `' . $table . '` VALUES ("",';
+    $query = 'INSERT INTO `' . $table . '` VALUES (NULL,';
     $keyQuery = '(`id`';
     $first = true;
     foreach ($data AS $k => $value) {

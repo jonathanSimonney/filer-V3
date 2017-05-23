@@ -1,16 +1,14 @@
 <header class="centeringDiv blueBackground header">
-    <div class="atExtremityContent">
-        <img src="assets/images/filerIcon.png" alt="icon of the filer" width="40" height="40">
-        <nav>
-            {% if location == 'root' %}
-                <p> </p><a href="?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i>log&nbsp;out</a>
-            {% elseif location == 'login'%}
-                <p> </p><a href="?action=register"><i class="fa fa-sign-in" aria-hidden="true"></i>register</a>
-            {% elseif location == 'register'%}
-                <p> </p><a href="?action=login"><i class="fa fa-home" aria-hidden="true"></i>log in</a>
-            {% else %}
-                <a href="?action=to_parent" class="precedent clickable"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> <a href="?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i>log&nbsp;out</a>
-            {% endif %}
-        </nav>
-    </div>
+    <img src="assets/images/filerIcon.png" alt="icon of the filer" width="40" height="40">
+    <nav>
+        {% if location == 'root' %}
+            <p> </p><a href="?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i>log&nbsp;out</a>
+        {% elseif location == 'login'%}
+            <p> </p><a href="?action=register"><i class="fa fa-sign-in" aria-hidden="true"></i>register</a>
+        {% elseif location == 'register'%}
+            <p> </p><a href="?action=login"><i class="fa fa-home" aria-hidden="true"></i>log in</a>
+        {% else %}
+            <a href="?action=to_parent" class="precedent clickable"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> <a href="?action=logout"><i class="fa fa-power-off" aria-hidden="true"></i>log&nbsp;out</a>
+        {% endif %}
+    </nav>
 </header>
