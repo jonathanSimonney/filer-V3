@@ -4,7 +4,8 @@ require_once 'model/session.php';
 $dbh = null;
 
 function connect_to_db(){
-    global $db_config;
+    global $privateConfig;
+    $db_config = $privateConfig['db_config'];
     $dsn = 'mysql:dbname='.$db_config['name'].';host='.$db_config['host'];
     $user = $db_config['user'];
     $password = $db_config['pass'];
