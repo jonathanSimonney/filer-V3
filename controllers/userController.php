@@ -28,11 +28,7 @@ class userController extends BaseController
                 $_SESSION['errorMessage'] = '';
             }
         }else{
-            echo $this->renderView('login.html.twig', ['location' => 'login']);
-            if (isset($_SESSION['currentUser']) && isset($_SESSION['currentUser']['loggedIn']) && $_SESSION['currentUser']['loggedIn']){
-                session_destroy();
-                session_start();
-            }
+            echo $this->renderView('login.html.twig', ['errorMessage' => $_SESSION['errorMessage'], 'location' => 'login']);
             $_SESSION['errorMessage'] = '';
         }
     }
@@ -54,7 +50,7 @@ class userController extends BaseController
             }
             echo json_encode($arrayReturned);
         }else{
-            echo $this->renderView('register.html.twig', ['location' => 'register']);
+            echo $this->renderView('register.html.twig', ['errorMessage' => $_SESSION['errorMessage'], 'location' => 'register']);
         }
     }
 }

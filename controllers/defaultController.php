@@ -41,7 +41,7 @@ class defaultController extends BaseController
             $arrayElements = [];
         }
 
-        echo $this->renderView('home.html.twig', ['tree' => $_SESSION['files'], 'location' => $_SESSION['location'], 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
+        echo $this->renderView('home.html.twig', ['errorMessage' => $_SESSION['errorMessage'], 'tree' => $_SESSION['files'], 'location' => $_SESSION['location'], 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
 
 
 
