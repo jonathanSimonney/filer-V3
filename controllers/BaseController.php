@@ -27,7 +27,7 @@ abstract class BaseController
             $connectionStatus = $this->getConnectionStatus();
             if ($accessLevel !== $connectionStatus)
             {
-                $this->logManager->generateAccessMessage('tried to '.$_GET['action'].' while being '.$connectionStatus, 'security');
+                $this->logManager->writeToLog('tried to '.$_GET['action'].' while being '.$connectionStatus, 'security');
                 die(json_encode(['error' => 'You must be '.$accessLevel.' to access to this page.']));
             }
         }

@@ -12,6 +12,31 @@ class SessionManager extends BaseManager
         $this->dbManager = DbManager::getInstance();
     }
 
+    protected function updatePath($idParent, $suppressedArray, $key, $path){
+        $path = array_merge([$idParent, 'childs'],$path);
+        if (array_key_exists($idParent, $suppressedArray)){
+            $newData = $this->updatePath($suppressedArray[$idParent], $suppressedArray, $key, $path);
+            $suppressedArray = $newData['suppressedArray'];
+            $path = $newData['path'];
+        }
+        $suppressedArray[$key] = $idParent;
+        //var_dump($suppressedArray, $path);
+
+        return [
+            'suppressedArray' => $suppressedArray,
+            'path'            => $path
+        ];
+    }
+
+    protected function getParentLocation(){
+        $currentLocation = $_SESSION['location'];
+        $this->navManager->closeCurrentFolder();
+        $parentLocation = $_SESSION['location'];
+        $_SESSION['location'] = $currentLocation;
+
+        return $parentLocation;
+    }
+
     public function findCorrespondingElements($superArray, $needleKey, $needleValue){
         $array_analysed = $this->makeInferiorKeyIndex($superArray, $needleKey);
         foreach ($array_analysed as $key => $array){
@@ -74,28 +99,12 @@ class SessionManager extends BaseManager
         }
     }
 
-    protected function updatePath($idParent, $suppressedArray, $key, $path){
-        $path = array_merge([$idParent, 'childs'],$path);
-        if (array_key_exists($idParent, $suppressedArray)){
-            $newData = $this->updatePath($suppressedArray[$idParent], $suppressedArray, $key, $path);
-            $suppressedArray = $newData['suppressedArray'];
-            $path = $newData['path'];
-        }
-        $suppressedArray[$key] = $idParent;
-        //var_dump($suppressedArray, $path);
-
-        return [
-            'suppressedArray' => $suppressedArray,
-            'path'            => $path
-        ];
-    }
-
     public function formatSessionFileAsTree(){
         $arrayAsTree = [];
         $suppressedArray = [];
         foreach ($_SESSION['files'] as $key => $value){
             $path = [$key];
-            if ($value['path'][0] !== 'u' && preg_match('/\d+(?=\/)/', $value['path'], $cor) === 1){
+            if ($value['path'][0] !== 'u' && preg_match('/\d+(?=\/)/', $value['path'], $cor) === 1){//we're not at the root folder, AND there is a number stocked in $cor
                 $newData = $this->updatePath((int)$cor[0], $suppressedArray, $key, $path);
                 $suppressedArray = $newData['suppressedArray'];
                 $path = $newData['path'];
@@ -123,15 +132,6 @@ class SessionManager extends BaseManager
     public function userSessionLocationInit(){
         $_SESSION['location']['array'] = ['files'];
         $_SESSION['location']['simple'] = 'root';
-    }
-
-    protected function getParentLocation(){
-        $currentLocation = $_SESSION['location'];
-        $this->navManager->closeCurrentFolder();
-        $parentLocation = $_SESSION['location'];
-        $_SESSION['location'] = $currentLocation;
-
-        return $parentLocation;
     }
 
     public function moveInSession($movedElementData, $destinationFolderData, $newPath, $toPrecedent = false){

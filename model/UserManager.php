@@ -17,15 +17,25 @@ class UserManager extends BaseManager
         $this->logManager = LogManager::getInstance();
     }
 
-    public function getUserById($id){
-        $id = (int)$id;
-        $data = $this->dbManager->findOne('SELECT * FROM users WHERE id = '.$id);
-        return $data;
-    }
-
     protected function getUserByUsername($username){
         $data = $this->dbManager->findOneSecure('SELECT * FROM users WHERE username = :username',
             ['username' => $username]);
+        return $data;
+    }
+
+    protected function userHash($pass){
+        $hash = password_hash($pass, PASSWORD_BCRYPT);
+        return $hash;
+    }
+
+    protected function transformData($data){
+        $data['password'] = $this->userHash($data['password']);
+        return $data;
+    }
+
+    public function getUserById($id){
+        $id = (int)$id;
+        $data = $this->dbManager->findOne('SELECT * FROM users WHERE id = '.$id);
         return $data;
     }
 
@@ -39,16 +49,6 @@ class UserManager extends BaseManager
         $this->formCheckManager->checkPassword($_POST['password'], $_POST['confirmationOfPassword']);
 
         return $this->formCheckManager->getArrayReturned($_SESSION['errorMessage']);
-    }
-
-    protected function userHash($pass){
-        $hash = password_hash($pass, PASSWORD_BCRYPT);
-        return $hash;
-    }
-
-    protected function transformData($data){
-        $data['password'] = $this->userHash($data['password']);
-        return $data;
     }
 
     public function userRegister($data, $arrayFields){

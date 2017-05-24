@@ -15,14 +15,18 @@ class FileManager extends BaseManager
         $this->dbManager = DbManager::getInstance();
     }
 
-    public function getFileData($fileId){
-        if ($fileId !== 'root'){
-            if (array_key_exists($fileId, $_SESSION['location']['files'])){
-                return $_SESSION['location']['files'][$fileId];
-            }
-            return $this->dbManager->getWhatHow($fileId, 'id', 'files')[0];
+    protected function moveOnServer($movedElementData, $destinationFolderData, $toParent = false){
+        $currentLocation = $_SESSION['location'];
+
+        $currentPath = $this->getRealPathToFile($movedElementData);
+        if ($toParent){
+            $this->navManager->closeCurrentFolder();
+            $this->navManager->closeCurrentFolder();
         }
-        return ['name' => 'root', 'id' => 'root', 'path' => 'uploads/'.$_SESSION['currentUser']['data']['id']];
+
+        rename($currentPath, $this->getRealPathToFile($destinationFolderData).'/'.$this->getNameWithExtent($movedElementData));
+
+        $_SESSION['location'] = $currentLocation;
     }
 
     protected function suppressRecursively($fileData){
@@ -44,6 +48,47 @@ class FileManager extends BaseManager
         $_SESSION['location'] = $currentLocation;
         rmdir($this->getRealPathToFile($fileData));
         $this->dbManager->removeFromDb('files',$fileData['id']);
+    }
+
+    protected function formatFileName($nameFile, $type){
+        $nameFile = preg_replace('/'.$type.'(?!.)/', '', $nameFile);
+        $nameFile = urlencode($nameFile);
+        return $nameFile;
+    }
+
+    protected function getFileType($file){
+        $type = '';
+        if (!empty($file['name'])){
+            preg_match('/\.[0-9a-z]+$/', $file["name"], $cor);
+            $type = $cor[0];
+        }
+
+        $type = str_replace(".", "", $type);
+        return $type;
+    }
+
+    protected function uploadFileInFolder($file, $path){
+        if (!move_uploaded_file($file['tmp_name'], $path)){
+            $_SESSION['errorMessage'] = "your file wasn't uploaded. Please check it is not too big (max upload size is of 8MB).";
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function uploadFileInDb($fileInformations){
+        $fileInformations['user_id'] = $_SESSION['currentUser']['data']['id'];
+        $this->dbManager->dbInsert('files', $fileInformations, true);
+    }
+
+    public function getFileData($fileId){
+        if ($fileId !== 'root'){
+            if (array_key_exists($fileId, $_SESSION['location']['files'])){
+                return $_SESSION['location']['files'][$fileId];
+            }
+            return $this->dbManager->getWhatHow($fileId, 'id', 'files')[0];
+        }
+        return ['name' => 'root', 'id' => 'root', 'path' => 'uploads/'.$_SESSION['currentUser']['data']['id']];
     }
 
     public function suppressFile($fileData){
@@ -113,7 +158,7 @@ class FileManager extends BaseManager
 
     public function downloadFile($fileData){
         // Specify file path.
-        $downloadFile =  getRealPathToFile($fileData);
+        $downloadFile =  $this->getRealPathToFile($fileData);
         // Getting file extension.
         $extension = $fileData['type'];
         // For Gecko browsers
@@ -130,23 +175,6 @@ class FileManager extends BaseManager
         header('Content-Disposition: attachment; filename=' . $fileData['name'].'.'.$extension);
         readfile($downloadFile);
         exit;
-    }
-
-    protected function formatFileName($nameFile, $type){
-        $nameFile = preg_replace('/'.$type.'(?!.)/', '', $nameFile);
-        $nameFile = urlencode($nameFile);
-        return $nameFile;
-    }
-
-    protected function getFileType($file){
-        $type = '';
-        if (!empty($file['name'])){
-            preg_match('/\.[0-9a-z]+$/', $file["name"], $cor);
-            $type = $cor[0];
-        }
-
-        $type = str_replace(".", "", $type);
-        return $type;
     }
 
     public function formatFileInfo($file, $nameFile){
@@ -198,20 +226,6 @@ class FileManager extends BaseManager
         return $_SESSION['errorMessage'] === '';
     }
 
-    protected function uploadFileInFolder($file, $path){
-        if (!move_uploaded_file($file['tmp_name'], $path)){
-            $_SESSION['errorMessage'] = "your file wasn't uploaded. Please check it is not too big (max upload size is of 8MB).";
-            return false;
-        }
-
-        return true;
-    }
-
-    protected function uploadFileInDb($fileInformations){
-        $fileInformations['user_id'] = $_SESSION['currentUser']['data']['id'];
-        $this->dbManager->dbInsert('files', $fileInformations, true);
-    }
-
     public function getRealPathToFile($fileInformations){
         if ($fileInformations === 'root'){
             $path = 'uploads/'.$_SESSION['currentUser']['data']['id'];
@@ -252,7 +266,7 @@ class FileManager extends BaseManager
     public function addFolder($folderInformations){
         mkdir($this->getRealPathToFile($folderInformations));
         $this->uploadFileInDb($folderInformations);
-        uploadFileInSession($folderInformations);
+        $this->sessionManager->uploadFileInSession($folderInformations);
     }
 
     public function generateNewPath($movedElementData, $destinationData){
@@ -272,20 +286,6 @@ class FileManager extends BaseManager
         }
 
         return $name;
-    }
-
-    protected function moveOnServer($movedElementData, $destinationFolderData, $toParent = false){
-        $currentLocation = $_SESSION['location'];
-
-        $currentPath = $this->getRealPathToFile($movedElementData);
-        if ($toParent){
-            $this->navManager->closeCurrentFolder();
-            $this->navManager->closeCurrentFolder();
-        }
-
-        rename($currentPath, $this->getRealPathToFile($destinationFolderData).'/'.$this->getNameWithExtent($movedElementData));
-
-        $_SESSION['location'] = $currentLocation;
     }
 
     public function orderBetweenFilesAndFolder($arrayToOrder){
