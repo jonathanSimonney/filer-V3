@@ -89,8 +89,8 @@ class fileController extends BaseController
     }
 
     public function removeAction(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $fileData = $this->fileManager->getFileData($_POST['notForUser']);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+            $fileData = $this->fileManager->getFileData($_GET['fileId']);
             if ($this->securityManager->userCanAccess($fileData)){
                 $this->fileManager->suppressFile($fileData);
                 $this->logManager->writeToLog('erased file or folder '.$this->fileManager->getNameWithExtent($fileData).' of id '.$fileData['id'], 'access');

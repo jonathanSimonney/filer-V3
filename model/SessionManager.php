@@ -12,7 +12,9 @@ class SessionManager extends BaseManager
         $this->dbManager = DbManager::getInstance();
     }
 
-    protected function updatePath($idParent, $suppressedArray, $key, $path){
+    protected function updatePath($idParent, $suppressedArray, $key, $path){//recursively goes up as long as there is an
+        // element which was suppressed, sooner, and ends up adding the element not yet suppressed to the array of element suppressed
+        // (so that we can go up the different id of the path)
         $path = array_merge([$idParent, 'childs'],$path);
         if (array_key_exists($idParent, $suppressedArray)){
             $newData = $this->updatePath($suppressedArray[$idParent], $suppressedArray, $key, $path);
@@ -110,19 +112,20 @@ class SessionManager extends BaseManager
                 $path = $newData['path'];
             }//we update the suppressedArray and the path, replacing the number for parent id by the path of this parent, if it was already suppressed
 
-            if ($this->getItemInArray($path, $arrayAsTree) !== null){
+            if ($this->getItemInArray($path, $arrayAsTree) !== null){//if an item is already present in the tree,
+                // at this path (that is, we have an item who should be a child of the currently added item.
                 $value = array_merge($this->getItemInArray($path, $arrayAsTree), $value);
                 $this->unsetItemInArray($path, $arrayAsTree);
-            }
+            }//we move this item so that it is considered as a child of the currently added item.
 
-            $precedentValue = $this->getItemInArray([$value['id']], $arrayAsTree);
+            $precedentValue = $this->getItemInArray([$value['id']], $arrayAsTree);//we get the item which should be the parent of the current item, and if we find it...
 
             if ($precedentValue !== null){
                 $value = array_merge($this->getItemInArray([$value['id']], $arrayAsTree), $value);
                 $this->unsetItemInArray([$value['id']], $arrayAsTree);
-            }
+            }//we change the path and value so that the currently added item is considered as the child of its parent.
 
-            $this->setItemInArray($path, $arrayAsTree, $value);
+            $this->setItemInArray($path, $arrayAsTree, $value);//we finally put the item at the good location
             //var_dump($arrayAsTree, $value, $path, getItemInArray($path, $arrayAsTree));
         }
 
