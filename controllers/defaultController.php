@@ -53,7 +53,7 @@ class defaultController extends BaseController
             foreach ($arrayElements as $key => $value){
                 //var_dump(getRealPathToFile($value));
                 $numberForId++;
-                if ($value['type'] === ''){
+                if ($value['isFolder']){
                     require 'views/inc/folder.html.twig';
                 }else{
                     require 'views/inc/file.html.twig';
