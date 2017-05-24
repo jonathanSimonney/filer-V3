@@ -1,5 +1,6 @@
 <?php
 use Router\Router;
+use Symfony\Component\Yaml\Yaml;
 
 session_start();
 
@@ -9,10 +10,11 @@ if (!array_key_exists('errorMessage', $_SESSION)){
     $_SESSION['errorMessage'] = '';
 }
 
-require('config/config.php');
+$publicConfig = Yaml::parse(file_get_contents('config/config.yml'));
+$privateConfig = Yaml::parse(file_get_contents('config/private.yml'));
 
 if (empty($_GET['action'])){
-    $_GET['action'] = 'home';
+    $_GET['action'] = $publicConfig['defaultAction'];
 }
 
 $action = $_GET['action'];
@@ -25,5 +27,5 @@ $twig = new Twig_Environment($loader, array(//todo activate cache, deactivate de
 ));
 $twig->addExtension(new Twig_Extension_Debug());//todo activate cache, deactivate debug BEFORE FINAL COMMIT! IMPORTANT!!!!
 
-$router = new Router($routes, $twig);
+$router = new Router($publicConfig['routes'], $twig);
 $router->callAction($action);
