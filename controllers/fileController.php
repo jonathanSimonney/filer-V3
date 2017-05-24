@@ -1,47 +1,67 @@
 <?php
 
 namespace controllers;
-require_once 'model/file.php';
-require_once 'model/user.php';
-require_once 'model/security.php';
-require_once 'model/form_check.php';
-require_once 'model/log.php';
-
-is_logged_in();//todo put it into the routing system.(put bool to enable check for connection of user.)
+use Model\FileManager;
+use model\FormCheckManager;
+use Model\LogManager;
+use Model\NavManager;
+use Model\SecurityManager;
+use Model\SessionManager;
+use Model\UserManager;
 
 class fileController extends BaseController
 {
+    protected $fileManager;
+    protected $userManager;
+    protected $securityManager;
+    protected $formCheckManager;
+    protected $logManager;
+    protected $navManager;
+    protected $sessionManager;
+
+    public function __construct(\Twig_Environment $twig, $accesslevel)
+    {
+        parent::__construct($twig, $accesslevel);
+        $this->fileManager = FileManager::getInstance();
+        $this->userManager = UserManager::getInstance();
+        $this->securityManager = SecurityManager::getInstance();
+        $this->formCheckManager = FormCheckManager::getInstance();
+        $this->logManager = LogManager::getInstance();
+        $this->navManager = NavManager::getInstance();
+        $this->sessionManager = SessionManager::getInstance();
+    }
+
     public function uploadAction(){
-        $fileInformations = format_file_info($_FILES['file'], $_POST['name']);
-        if (is_upload_possible($_FILES['file'], $fileInformations)) {
-            make_upload($_FILES['file'], $fileInformations);
-            writeToLog(generateAccessMessage('uploaded file '.$_POST['name'].', of id '.get_last_inserted_id()), 'access');
+        $fileInformations = $this->fileManager->formatFileInfo($_FILES['file'], $_POST['name']);
+        if ($this->fileManager->isUploadPossible($_FILES['file'], $fileInformations)) {
+            $this->fileManager->makeUpload($_FILES['file'], $fileInformations);
+            $this->logManager->writeToLog('uploaded file '.$_POST['name'].', of id '.$this->logManager->getLastInsertedId(), 'access');
         }
         header('Location: ?action=home');
         exit();
     }
 
     public function downloadAction(){
-        $fileData = get_file_data($_GET['fileId']);
-        if (user_can_access($fileData)){
-            download_file($fileData);
-            writeToLog(generateAccessMessage('downloaded file '.get_name_with_extent($fileData['name']).', of id '.$fileData['id']), 'access');
+        $fileData = $this->fileManager->getFileData($_GET['fileId']);
+        if ($this->securityManager->userCanAccess($fileData)){
+            $this->fileManager->downloadFile($fileData);
+            $this->logManager->writeToLog('downloaded file '.$this->fileManager->getNameWithExtent($fileData['name']).', of id '.$fileData['id'], 'access');
         }
     }
 
     public function replaceAction(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $fileData = get_file_data($_POST['notForUser']);
-            if (user_can_access($fileData)){
-                if (is_new_file_ok($fileData)){//Did not merge these 2 if because both implement the $_SESSION['errorMessage']
-                    replace_file(get_real_path_to_file($fileData), $_FILES['file']);
-                    writeToLog(generateAccessMessage('replaced file '.get_name_with_extent($fileData).', of id '.$fileData['id'].' by another file'), 'access');
+            $fileData = $this->fileManager->getFileData($_POST['notForUser']);
+            if ($this->securityManager->userCanAccess($fileData)){
+                if ($this->fileManager->isNewFileOk($fileData)){//Did not merge these 2 if because both implement the $_SESSION['errorMessage']
+                    $this->fileManager->replaceFile($this->fileManager->getRealPathToFile($fileData), $_FILES['file']);
+                    $this->logManager->writeToLog('replaced file '.$this->fileManager->getNameWithExtent($fileData).', of id '.$fileData['id'].' by another file', 'access');
                 }else{
-                    writeToLog(generateAccessMessage('wanted to replace file '.get_name_with_extent($fileData).', of id '.$fileData['id'].' by a .'.$fileData['type']), 'access');
+                    $this->logManager->writeToLog('wanted to replace file '.$this->fileManager->getNameWithExtent($fileData).', of id '.$fileData['id'].' by a .'.$fileData['type'], 'access');
                 }
             }
         }else{
-            writeToLog(generateAccessMessage('tried to access replace page with GET request method.'), 'security');
+            $this->logManager->writeToLog('tried to access replace page with GET request method.', 'security');
             $_SESSION['errorMessage'] = 'Please access pages with provided links, not by writing yourself url.';
         }
         header('Location: ?action=home');
@@ -50,18 +70,18 @@ class fileController extends BaseController
 
     public function renameAction(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $fileData = get_file_data($_POST['notForUser']);
-            if (user_can_access($fileData)){
-                $newFileData = format_new_file_data($fileData);
-                if (is_name_ok($newFileData)){
-                    rename_file($fileData, $newFileData);
-                    writeToLog(generateAccessMessage('renamed file (or folder) '.get_name_with_extent($fileData).', of id '.$fileData['id'].' into '.$newFileData['name'].'.'), 'access');
+            $fileData = $this->fileManager->getFileData($_POST['notForUser']);
+            if ($this->securityManager->userCanAccess($fileData)){
+                $newFileData = $this->fileManager->formatNewFileData($fileData);
+                if ($this->fileManager->isNameOk($newFileData)){
+                    $this->fileManager->renameFile($fileData, $newFileData);
+                    $this->logManager->writeToLog('renamed file (or folder) '.$this->fileManager->getNameWithExtent($fileData).', of id '.$fileData['id'].' into '.$newFileData['name'].'.', 'access');
                 }else{
-                    writeToLog(generateAccessMessage('TRIED to rename file (or folder) '.get_name_with_extent($fileData).', of id '.$fileData['id'].' into '.$newFileData['name'].'.'), 'access');
+                    $this->logManager->writeToLog('TRIED to rename file (or folder) '.$this->fileManager->getNameWithExtent($fileData).', of id '.$fileData['id'].' into '.$newFileData['name'].'.', 'access');
                 }
             }
         }else{
-            writeToLog(generateAccessMessage('tried to access rename page with GET request method.'), 'security');
+            $this->logManager->writeToLog('tried to access rename page with GET request method.', 'security');
             $_SESSION['errorMessage'] = 'Please access pages with provided links, not by writing yourself url.';
         }
         header('Location: ?action=home');
@@ -70,13 +90,13 @@ class fileController extends BaseController
 
     public function removeAction(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $fileData = get_file_data($_POST['notForUser']);
-            if (user_can_access($fileData)){
-                suppress_file($fileData);
-                writeToLog(generateAccessMessage('erased file or folder '.get_name_with_extent($fileData).' of id '.$fileData['id']), 'access');
+            $fileData = $this->fileManager->getFileData($_POST['notForUser']);
+            if ($this->securityManager->userCanAccess($fileData)){
+                $this->fileManager->suppressFile($fileData);
+                $this->logManager->writeToLog('erased file or folder '.$this->fileManager->getNameWithExtent($fileData).' of id '.$fileData['id'], 'access');
             }
         }else{
-            writeToLog(generateAccessMessage('tried to access remove page with GET request method.'), 'security');
+            $this->logManager->writeToLog('tried to access remove page with GET request method.', 'security');
             $_SESSION['errorMessage'] = 'Please access pages with provided links, not by writing yourself url.';
         }
         header('Location: ?action=home');
@@ -84,13 +104,13 @@ class fileController extends BaseController
     }
 
     public function addFolderAction(){
-        $folderInformations = format_folder_info($_POST['name']);
-        if (is_name_ok($folderInformations)) {
+        $folderInformations = $this->fileManager->formatFolderInfo($_POST['name']);
+        if ($this->fileManager->isNameOk($folderInformations)) {
             //var_dump($folderInformations);
-            add_folder($folderInformations);
-            writeToLog(generateAccessMessage('created folder '.$folderInformations['name'].', of id '.get_last_inserted_id()), 'access');
+            $this->fileManager->addFolder($folderInformations);
+            $this->logManager->writeToLog('created folder '.$folderInformations['name'].', of id '.$this->logManager->getLastInsertedId(), 'access');
         }else{
-            writeToLog(generateAccessMessage('tried to add a folder of name'.$folderInformations['name']), 'access');
+            $this->logManager->writeToLog('tried to add a folder of name'.$folderInformations['name'], 'access');
         }
 
         header('Location: ?action=home');
@@ -98,31 +118,27 @@ class fileController extends BaseController
     }
 
     public function moveAction(){
-        $movedElementData = get_file_data($_GET['idMovedElement']);
+        $movedElementData = $this->fileManager->getFileData($_GET['idMovedElement']);
         $toParent = false;
         if ($_GET['idDestination'] === 'precedent'){
             $toParent = true;
 
             $currentLocation = $_SESSION['location'];
 
-            close_current_folder();
+            $this->navManager->closeCurrentFolder();
             $destinationId = $_SESSION['location']['simple'];
 
-            close_current_folder();
+            $this->navManager->closeCurrentFolder();
 
-            $_SESSION['location']['files']= get_item_in_array($_SESSION['location']['array'],$_SESSION);
-            $destinationFolderData = get_file_data($destinationId);
+            $_SESSION['location']['files']= $this->sessionManager->getItemInArray($_SESSION['location']['array'],$_SESSION);
+            $destinationFolderData = $this->fileManager->getFileData($destinationId);
             $_SESSION['location'] = $currentLocation;
         }else{
-            $destinationFolderData = get_file_data($_GET['idDestination']);
+            $destinationFolderData = $this->fileManager->getFileData($_GET['idDestination']);
         }
-        if (user_can_access($movedElementData) && user_can_access($destinationFolderData, true)){
-            $newPath = generate_new_path($movedElementData, $destinationFolderData);
-
-            db_update('files', $movedElementData['id'],['path' => $newPath]);
-            move_in_session($movedElementData, $destinationFolderData, $newPath, $toParent);
-            move_on_server($movedElementData, $destinationFolderData, $toParent);
-            writeToLog(generateAccessMessage('moved file or folder '.get_name_with_extent($movedElementData).' of id '.$movedElementData['id'].' into folder '.$destinationFolderData['name'].' of id '.$destinationFolderData['id']), 'access');
+        if ($this->securityManager->userCanAccess($movedElementData) && $this->securityManager->userCanAccess($destinationFolderData, true)){
+            $this->fileManager->moveFile($toParent, $movedElementData, $destinationFolderData);
+            $this->logManager->writeToLog('moved file or folder '.$this->fileManager->getNameWithExtent($movedElementData).' of id '.$movedElementData['id'].' into folder '.$destinationFolderData['name'].' of id '.$destinationFolderData['id'], 'access');
         }
 
 
@@ -132,11 +148,11 @@ class fileController extends BaseController
     }
 
     public function showAction(){
-        $fileData = get_file_data($_GET['id']);
+        $fileData = $this->fileManager->getFileData($_GET['id']);
         http_response_code(400);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if (user_can_access($fileData)){
+            if ($this->userManager->userCanAccess($fileData)){
                 if ($fileData['type'] !== ''){
                     http_response_code(200);
 
@@ -150,35 +166,35 @@ class fileController extends BaseController
                         echo $ret;
                     }
                 }else{
-                    writeToLog(generateAccessMessage('tried to access his folder '.$fileData['name'].' of id '.$fileData['id']), 'security');
+                    $this->logManager->writeToLog('tried to access his folder '.$fileData['name'].' of id '.$fileData['id'], 'security');
                 }
             }
         }else{
-            if (user_can_access($fileData)){
+            if ($this->securityManager->userCanAccess($fileData)){
                 if ($fileData['type'] !== ''){
-                    $path = get_real_path_to_file($fileData);
+                    $path = $this->fileManager->getRealPathToFile($fileData);
                     http_response_code(200);
-                    setCorrectHeader($fileData['type']);
+                    $this->fileManager->setCorrectHeader($fileData['type']);
                     readfile($path);
-                    writeToLog(generateAccessMessage('saw his file '.get_name_with_extent($fileData).' of id '.$fileData['id']), 'access');
+                    $this->logManager->writeToLog('saw his file '.$this->fileManager->getNameWithExtent($fileData).' of id '.$fileData['id'], 'access');
                 }else{
-                    writeToLog(generateAccessMessage('tried to access his folder '.$fileData['name'].' of id '.$fileData['id']), 'security');
+                    $this->logManager->writeToLog('tried to access his folder '.$fileData['name'].' of id '.$fileData['id'], 'security');
                 }
             }else{
-                writeToLog(generateAccessMessage('tried to access file '.get_name_with_extent($fileData).' of id '.$fileData['id'].' belonging to user number '.$fileData['user_id']), 'security');
+                $this->logManager->writeToLog('tried to access file '.$this->fileManager->getNameWithExtent($fileData).' of id '.$fileData['id'].' belonging to user number '.$fileData['user_id'], 'security');
             }
         }
     }
 
     public function writeAction(){
-        $fileData = get_file_data($_GET['id']);
+        $fileData = $this->fileManager->getFileData($_GET['id']);
         http_response_code(400);
-        if (user_can_access($fileData)){
+        if ($this->securityManager->userCanAccess($fileData)){
             //var_dump($_GET['newContent']);
-            file_put_contents(get_real_path_to_file($fileData), $_GET['newContent']);
+            file_put_contents($this->fileManager->getRealPathToFile($fileData), $_GET['newContent']);
             http_response_code(200);
-            writeToLog(generateAccessMessage('wrote into his file '.get_name_with_extent($fileData).' of id '.$fileData['id']), 'access');
-            //echo file_get_contents(get_real_path_to_file($fileData));
+            $this->logManager->writeToLog('wrote into his file '.$this->fileManager->getNameWithExtent($fileData).' of id '.$fileData['id'], 'access');
+            //echo file_get_contents(getRealPathToFile($fileData));
         }
     }
 }

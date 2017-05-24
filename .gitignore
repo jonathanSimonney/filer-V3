@@ -4,7 +4,7 @@ logs/*
 vendor/*
 !/uploads/.gitkeep
 .idea
-config/private.php
+config/private.yml
 /node_modules
 .sass-cache/*
 *.css.map

@@ -2,18 +2,28 @@
 namespace controllers;
 
 
+use Model\NavManager;
+
 require_once 'model/nav.php';
 
 class navController extends BaseController
 {
+    protected $navManager;
+
+    public function __construct(\Twig_Environment $twig, $accesslevel)
+    {
+        parent::__construct($twig, $accesslevel);
+        $this->navManager = NavManager::getInstance();
+    }
+
     public function openAction(){
-        open_folder($_GET['fileId']);
+        $this->navManager->openFolder($_GET['fileId']);
         header('Location: ?action=home');
         exit();
     }
 
     public function toParentAction(){
-        close_current_folder();
+        $this->navManager->closeCurrentFolder();
 
         header('Location: ?action=home');
         exit();

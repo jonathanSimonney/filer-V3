@@ -9,18 +9,20 @@
 namespace controllers;
 
 
+use Model\LogManager;
+
 abstract class BaseController
 {
     private $twig;
     //protected $formManager;
-    //protected $logManager;
+    protected $logManager;
 
-    public function __construct(\Twig_Environment $twig/*, $accessLevel, $requestMethod*/)
+    public function __construct(\Twig_Environment $twig, $accessLevel/*, $requestMethod*/)
     {
         $this->twig = $twig;
         //$this->formManager = FormManager::getInstance();
-        //$this->logManager = LogManager::getInstance();
-        /*if ($accessLevel !== 'both')
+        $this->logManager = LogManager::getInstance();
+        if ($accessLevel !== 'both')
         {
             $connectionStatus = $this->getConnectionStatus();
             if ($accessLevel !== $connectionStatus)
@@ -28,7 +30,7 @@ abstract class BaseController
                 $this->logManager->generateAccessMessage('tried to '.$_GET['action'].' while being '.$connectionStatus, 'security');
                 die(json_encode(['error' => 'You must be '.$accessLevel.' to access to this page.']));
             }
-        }*/
+        }
 
         //for checking of server method
         /*if ($_SERVER['REQUEST_METHOD'] !== strtoupper($requestMethod))
