@@ -2,18 +2,29 @@
 
 namespace controllers;
 
-require_once 'model/user.php';
-require_once 'model/log.php';
+use Model\LogManager;
+use Model\UserManager;
+
 class userController extends BaseController
 {
+
+    protected $userManager;
+    protected $logManager;
+
+    public function __construct(\Twig_Environment $twig)
+    {
+        parent::__construct($twig);
+        $this->userManager = UserManager::getInstance();
+        $this->logManager = LogManager::getInstance();
+    }
+
     public function loginAction(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (user_check_login($_POST)) {
-                user_login($_POST['username']);
-                writeToLog(generateAccessMessage('connected himself'), 'access');
+            if ($this->userManager->userCheckLogin($_POST)) {
+                $this->userManager->userLogin($_POST['username']);
+                $this->logManager->writeToLog('connected himself', 'access');
             }else{
-                $jsonValue = $_SESSION['errorMessage'];
-                require('views/inc/json.php');
+                echo json_encode($_SESSION['errorMessage']);
                 $_SESSION['errorMessage'] = '';
             }
         }else{
@@ -29,7 +40,7 @@ class userController extends BaseController
     }
 
     public function logoutAction(){
-        writeToLog(generateAccessMessage('deconnected himself'), 'access');
+        $this->logManager->writeToLog('deconnected himself', 'access');
         session_destroy();
         header('Location: ?action=login');
         exit(0);
@@ -38,13 +49,12 @@ class userController extends BaseController
     public function registerAction(){
         $error = '';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $arrayReturned = user_check_register($_POST);
+            $arrayReturned = $this->userManager->userCheckRegister($_POST);
             if ($arrayReturned['formOk']){
-                user_register($_POST, ['username', 'email', 'password', 'indic']);
-                writeToLog(generateAccessMessage('created an account as '.$_POST['username']), 'access');
+                $this->userManager->userRegister($_POST, ['username', 'email', 'password', 'indic']);
+                $this->logManager->writeToLog('created an account as '.$_POST['username'], 'access');
             }
-            $jsonValue = $arrayReturned;
-            require('views/inc/json.php');
+            echo json_encode($arrayReturned);
         }else{
             echo $this->renderView('register.html.twig', ['location' => 'register']);
         }

@@ -1,16 +1,33 @@
 <?php
 namespace controllers;
 
-require_once 'model/db.php';
-require_once 'model/user.php';
-require_once 'model/security.php';
-require_once 'model/session.php';
+use Model\DbManager;
+use Model\FileManager;
+use Model\SecurityManager;
+use Model\SessionManager;
+use Model\UserManager;
 
 class defaultController extends BaseController
 {
+    protected $dbManager;
+    protected $userManager;
+    protected $securityManager;
+    protected $sessionManager;
+    protected $fileManager;
+
+    public function __construct(\Twig_Environment $twig)
+    {
+        parent::__construct($twig);
+        $this->dbManager = DbManager::getInstance();
+        $this->sessionManager = SessionManager::getInstance();
+        $this->securityManager = SecurityManager::getInstance();
+        $this->userManager = UserManager::getInstance();
+        $this->fileManager = FileManager::getInstance();
+    }
+
     public function homeAction(){
-        is_logged_in();
-        $_SESSION['location']['files'] = get_item_in_array($_SESSION['location']['array'],$_SESSION);
+        $this->securityManager->isLoggedIn();
+        $_SESSION['location']['files'] = $this->sessionManager->getItemInArray($_SESSION['location']['array'],$_SESSION);
         $arrayElements = $_SESSION['location']['files'];
 
         //var_dump($arrayElements, $_SESSION['location'], $_SESSION['files']);
@@ -18,7 +35,7 @@ class defaultController extends BaseController
 
         if ($arrayElements !== null){
 
-            $arrayElements = order_between_files_and_folder($arrayElements);
+            $arrayElements = $this->fileManager->orderBetweenFilesAndFolder($arrayElements);
         }
         else
         {
@@ -32,10 +49,10 @@ class defaultController extends BaseController
         /*if ($arrayElements !== null){
             $numberForId = 0;
 
-            $arrayElements = order_between_files_and_folder($arrayElements);
+            $arrayElements = orderBetweenFilesAndFolder($arrayElements);
 
             foreach ($arrayElements as $key => $value){
-                //var_dump(get_real_path_to_file($value));
+                //var_dump(getRealPathToFile($value));
                 $numberForId++;
                 if ($value['type'] === ''){
                     require 'views/inc/folder.html.twig';

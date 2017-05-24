@@ -8,7 +8,7 @@ routes:
     rename:     'file:rename'
     replace:    'file:replace'
     remove:     'file:remove'
-    add_folder: 'file:addFolder'
+    addFolder:  'file:addFolder'
     move:       'file:move'
     show:       'file:show'
     write:      'file:write'
