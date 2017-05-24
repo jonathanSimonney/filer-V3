@@ -297,6 +297,7 @@ class FileManager extends BaseManager
             if ($value['type'] === ''){
                 $arrayFolders[] = $value;
             }else{
+                $value['filesize'] = filesize($this->getRealPathToFile($value));
                 $arrayFiles[] = $value;
             }
             $arrayToOrder = array_merge($arrayFolders, $arrayFiles);
