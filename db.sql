@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 24 Mai 2017 à 16:20
+-- Généré le :  Mer 24 Mai 2017 à 23:12
 -- Version du serveur :  5.6.17-log
 -- Version de PHP :  7.0.3
 
@@ -34,8 +34,9 @@ CREATE TABLE IF NOT EXISTS `files` (
   `type` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT '2016-10-24 10:23:47',
+  `isFolder` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
