@@ -49,18 +49,40 @@ window.onload = function(){
             buttonReplace[i].onclick = function(){
                 var arrayElements = this.parentNode.childNodes;
                 for (var i in arrayElements){
-                    if (typeof arrayElements[i].style != 'undefined') {
-                        if (arrayElements[i].className.indexOf("replaceForm") != -1) {
-                            var toShowForm = arrayElements[i];
-                            break;
-                        }
+                    console.log(arrayElements[i].childNodes[i]);
+                    if(arrayElements[i].childNodes[i].className =='fileForm'){
+
                     }
                 }
 
-                toggleFormState(toShowForm);
+
+                /*toggleFormState(toShowForm);*/
             }
         }
     }
+
+    $('.rename').click(function() {
+        if($(this).siblings('.renameForm').hasClass("collapsed")){
+            $(this).siblings('.renameForm').removeClass('collapsed');
+            $(this).siblings().find('.rename_input').focus();
+            $(this).siblings().find('label').html("<i class='fa fa-check'></i>");
+        }
+        else{
+            $(this).siblings('.renameForm').addClass('collapsed');
+            $(this).siblings().find('label').html("");
+        }
+    });
+
+
+    $('#fileForm').change(function () {
+        alert('oh');
+        $(this).parents('.fileFormReplace').submit();
+    });
+
+    $('#fileForm').change(function () {
+        alert('oh');
+        $(this).parents('.fileFormReplace').submit();
+    });
 
     for (var i in buttonRename){
         if (typeof buttonRename[i].style != 'undefined') {
@@ -75,7 +97,7 @@ window.onload = function(){
                     }
                 }
 
-                toggleFormState(toShowForm);
+                /*toggleFormState(toShowForm);*/
             }
         }
     }
@@ -93,7 +115,7 @@ window.onload = function(){
                     }
                 }
 
-                toggleFormState(toShowForm);
+                /*toggleFormState(toShowForm);*/
             }
         }
     }
