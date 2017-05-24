@@ -62,4 +62,16 @@ class defaultController extends BaseController
         }*/
         $_SESSION['errorMessage'] = '';
     }
+
+    public function welcomeAction()
+    {
+        if ($this->getConnectionStatus() === 'connected')
+        {
+            header('Location: ?action=home');
+            exit(0);
+        }
+        
+        header('Location: ?action=login');
+        exit(0);
+    }
 }
