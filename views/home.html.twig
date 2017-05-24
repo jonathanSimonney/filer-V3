@@ -84,8 +84,6 @@
 
                 <!-- display rows with files-->
 
-                {{ dump() }}
-
                 {% if arrayElement is defined %}
                     {% set numberForId = 0 %}
                     {% for key, element in arrayElement %}
@@ -124,7 +122,7 @@
             <button id="folder">create folder</button>
         </div>
 
-        <form class="toHide uploadForm" action="?action=upload" method="post" enctype="multipart/form-data" name="uploadFile">
+        <form class="uploadForm" action="?action=upload" method="post" enctype="multipart/form-data" name="uploadFile">
             <div class="centeredChild">
                 <input type="file" name="file">
                 <br>
@@ -134,7 +132,7 @@
             </div>
         </form>
 
-        <form class="toHide addFolder" action="?action=addFolder" method="post"  name="addFolder">
+        <form class="addFolder" action="?action=addFolder" method="post"  name="addFolder">
             <div class="centeredChild">
                 <!--<input type="file" name="file" webkitdirectory directory multiple>
                 <br> POSSIBLY USEFUL IF IMPLEMENT A DIRECT UPLOAD OF FOLDER.-->

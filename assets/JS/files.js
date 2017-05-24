@@ -44,45 +44,39 @@ window.onload = function(){
         toggleFormState(document.querySelector('.uploadForm'));
     };
 
-    for (var i in buttonReplace){
-        if (typeof buttonReplace[i].style != 'undefined') {
-            buttonReplace[i].onclick = function(){
-                var arrayElements = this.parentNode.childNodes;
-                for (var i in arrayElements){
-                    console.log(arrayElements[i].childNodes[i]);
-                    if(arrayElements[i].childNodes[i].className =='fileForm'){
-
-                    }
-                }
-
-
-                /*toggleFormState(toShowForm);*/
-            }
-        }
-    }
-
     $('.rename').click(function() {
         if($(this).siblings('.renameForm').hasClass("collapsed")){
             $(this).siblings('.renameForm').removeClass('collapsed');
             $(this).siblings().find('.rename_input').focus();
-            $(this).siblings().find('label').html("<i class='fa fa-check'></i>");
+            $(this).siblings().find('label').html("<i class='fa fa-check'></i><p>confirm</p>");
+            $(this).html("<i class='fa fa-times'></i>");
         }
         else{
             $(this).siblings('.renameForm').addClass('collapsed');
             $(this).siblings().find('label').html("");
+            $(this).html("<i class='fa fa-pencil'></i>");
+        }
+    });
+
+    $('.replace').click(function() {
+        if($(this).siblings('.replaceForm').hasClass("collapsed")){
+            $(this).siblings('.replaceForm').removeClass('collapsed');
+            $(this).siblings().find('.label_choose_file').html("<p>choose a file</p>");
+            $(this).siblings().find('.label_confirm').html("<i class='fa fa-check'></i><p>confirm</p>");
+            $(this).html("<i class='fa fa-times'></i>");
+        }
+        else{
+            $(this).siblings('.replaceForm').addClass('collapsed');
+            $(this).siblings().find('.label_choose_file').html("");
+            $(this).siblings().find('.label_confirm').html("");
+            $(this).html("<i class='fa fa-exchange'></i>");
         }
     });
 
 
-    $('#fileForm').change(function () {
-        alert('oh');
+    /*$('#fileFormReplace').change(function (){
         $(this).parents('.fileFormReplace').submit();
-    });
-
-    $('#fileForm').change(function () {
-        alert('oh');
-        $(this).parents('.fileFormReplace').submit();
-    });
+    });*/
 
     for (var i in buttonRename){
         if (typeof buttonRename[i].style != 'undefined') {

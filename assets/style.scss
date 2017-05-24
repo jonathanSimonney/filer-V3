@@ -515,19 +515,56 @@ html{
                                         list-style: none;
                                         padding: 0 10px;
 
-                                        i{
-                                            margin: 0 5px;
+                                        label{
+                                            cursor: pointer;
+                                            margin: 0;
                                         }
 
-                                        .renameForm{
+                                        a{
+                                            color: $grey;
+                                        }
+
+                                        form{
                                             display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+
+                                            input{
+                                                width: 150px;
+                                                height: 27px;
+                                            }
+
+                                            label{
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                cursor: pointer;
+                                                margin: 0;
+                                                padding: 5px 10px;
+                                                background-color: $dark;
+                                                color: $lightblue;
+                                            }
+
+                                            .label_choose_file{
+                                                padding: 5px 10px;
+                                                border-radius: 5px 0 0 5px;
+                                                cursor: pointer;
+                                                color: $white;
+                                                background-color: $orange;
+                                            }
+                                            .label_choose_file:hover{
+                                                background-color: $orangebrick;
+                                                transition: 0.5s;
+                                            }
                                         }
 
                                         .collapsed{
                                             width: 0;
+                                            height: 0;
 
                                             input{
                                                 width: inherit;
+                                                height: inherit;
                                                 padding: 0;
                                                 border: 0;
                                             }
