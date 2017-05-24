@@ -29,11 +29,9 @@ class userController extends BaseController
             }
         }else{
             echo $this->renderView('login.html.twig', ['location' => 'login']);
-            if (array_key_exists('currentUser', $_SESSION)){
-                if ($_SESSION['currentUser']['loggedIn']){
-                    session_destroy();
-                    session_start();
-                }
+            if (isset($_SESSION['currentUser']) && isset($_SESSION['currentUser']['loggedIn']) && $_SESSION['currentUser']['loggedIn']){
+                session_destroy();
+                session_start();
             }
             $_SESSION['errorMessage'] = '';
         }

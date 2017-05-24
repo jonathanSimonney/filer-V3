@@ -89,7 +89,7 @@ class DbManager extends BaseManager
     }
 
     public function findAllSecure($query, $data = []){
-        $dbh = $this->geDbh();
+        $dbh = $this->getDbh();
         $sth = $dbh->prepare($query);
         $sth->execute($data);
         $result = $sth->fetchAll(PDO::FETCH_ASSOC);
