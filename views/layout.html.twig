@@ -5,7 +5,7 @@
     <title>Filer</title>
     <meta name="author" content="Jonathan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://use.fontawesome.com/e79eca285b.js"></script>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,32 +16,28 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">FILER</a>
-
-        <div class="collapse navbar-collapse " id="navbarsExampleDefault">
-            <div class="nav_collapse_content m-sm-auto ml-lg-auto mr-lg-0" >
-                <p class="welcome_text hidden-md-down">Welcome ...</p> <!--display name of user-->
-                <ul class="navbar-nav m-xs-auto m-lg-0 align-items-lg-center">
-                    <li>
-                        <a href="?action=register"><i class="fa fa-user-plus" aria-hidden="true"></i>register</a>
-                    </li>
-                    <li>
-                        <a href="?action=login"><i class="fa fa-sign-in" aria-hidden="true"></i>log in</a>
-                    </li>
-                    <li>
-                        <form id="form_logout" action="?action=logout" method="POST">
-                            <i class="fa fa-power-off"></i>
-                            <input type="submit" value="Logout">
-                        </form>
-                    </li>
-                </ul>
-            </div>
+    <div class="nav_container">
+        <div class="logo_container">
+            <a class="navbar-brand" href="#">FILER</a>
         </div>
-    </nav>
+        <ul>
+            <li>
+                <p class="welcome_text"><i class="fa fa-user-o"></i>Manu</p>
+            </li>
+            <li>
+                <a href="?action=register"><i class="fa fa-user-plus" aria-hidden="true"></i>register</a>
+            </li>
+            <li>
+                <a href="?action=login"><i class="fa fa-sign-in" aria-hidden="true"></i>log in</a>
+            </li>
+            <li>
+                <form id="form_logout" action="?action=logout" method="POST">
+                    <i class="fa fa-power-off"></i>
+                    <input type="submit" value="Logout">
+                </form>
+            </li>
+        </ul>
+    </div>
 </header>
 
     <div id="main_container">

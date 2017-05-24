@@ -4,52 +4,11 @@
     <head>
         <script src="assets/JS/script.js"></script>
     </head>
-    <div class="home_container_mobile hidden-lg-up">
+
+    <div class="home_container_desktop ">
         <div class="sidebar">
             <div class="new_menu">
-                <button id="new_button" onclick="toggleMenu()" class="dropbtn">NEW</button>
-                <div class="myDropdown dropdown-content">
-                    <form id="form_upload" method="POST" action="?action=upload" enctype="multipart/form-data">
-                        <input type="file" name="user_file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
-                        <label for="file_upload"><i class="fa fa-upload"></i><span>Upload a file</span></label>
-                    </form>
-                    <form id="form_upload" method="POST" action="?action=folder" enctype="multipart/form-data">
-                        <button name="user_file" id="folder_upload" class="inputfile inputfile-1"></button>
-                        <label for="folder_upload"><i class="fa fa-folder"></i><span>Create a folder</span></label>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="main_content">
-            <div class="path"></div>
-            <div id="file_table">
-                <table>
-                    <tr id="header_table">
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th colspan="5">Options</th>
-                    </tr>
-                    <?php
-                display_action();
-                ?>
-                </table>
-            </div>
-
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                </div>
-            </div>
-        </div>
-        <div class="infos">
-        </div>
-    </div>
-
-    <div class="home_container_desktop hidden-md-down">
-        <div class="sidebar">
-            <div class="new_menu">
-                <button id="new_button" onclick="toggleMenu()" class="dropbtn">NEW</button>
+                <button class="new_button dropbtn" onclick="toggleMenu()"><i class="fa fa-plus"></i>NEW</button>
                 <div class="myDropdown dropdown-content">
                     <form id="form_upload" method="POST" action="?action=upload" enctype="multipart/form-data">
                         <input type="file" name="user_file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
@@ -77,18 +36,55 @@
                 <i class="fa fa-chevron-right"></i>
                 <h5>...</h5>
             </div>
-            <div class="file_table">
-                <table>
-                    <tr id="header_table">
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th colspan="5">Options</th>
-                    </tr>
-                    <?php
-                display_action();
-                ?>
-                </table>
+            <div class="rows_container">
+                <div class="main_row">
+                    <div class="col-2">
+                        <b>Type</b>
+                    </div>
+                    <div class="col-3">
+                        <b>Name</b>
+                    </div>
+                    <div class="col-1">
+                        <b>Size</b>
+                    </div>
+                    <div class="col-6">
+                        <b>Options</b>
+                    </div>
+                </div>
+
+                <!-- display rows with files-->
+
+                <div class="row">
+                    <div class="col-2">
+                        <p><i class="fa fa-file"></i></p>
+                    </div>
+                    <div class="col-3">
+                        <p>test html</p>
+                    </div>
+                    <div class="col-1">
+                        <p>5 Mo</p>
+                    </div>
+                    <div class="col-6 options">
+                        <ul>
+                            <li>
+                                <i class="fa fa-trash"></i>
+                                <p>delete</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-pencil"></i>
+                                <p>rename</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-exchange"></i>
+                                <p>replace</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-download"></i>
+                                <p>download</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div id="myModal" class="modal">
