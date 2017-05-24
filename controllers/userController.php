@@ -11,9 +11,9 @@ class userController extends BaseController
     protected $userManager;
     protected $logManager;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $accesslevel)
     {
-        parent::__construct($twig);
+        parent::__construct($twig, $accesslevel);
         $this->userManager = UserManager::getInstance();
         $this->logManager = LogManager::getInstance();
     }

@@ -15,9 +15,9 @@ class defaultController extends BaseController
     protected $sessionManager;
     protected $fileManager;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $accessLevel)
     {
-        parent::__construct($twig);
+        parent::__construct($twig, $accessLevel);
         $this->dbManager = DbManager::getInstance();
         $this->sessionManager = SessionManager::getInstance();
         $this->securityManager = SecurityManager::getInstance();
@@ -26,7 +26,6 @@ class defaultController extends BaseController
     }
 
     public function homeAction(){
-        $this->securityManager->isLoggedIn();
         $_SESSION['location']['files'] = $this->sessionManager->getItemInArray($_SESSION['location']['array'],$_SESSION);
         $arrayElements = $_SESSION['location']['files'];
 

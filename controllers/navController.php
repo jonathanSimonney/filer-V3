@@ -10,9 +10,9 @@ class navController extends BaseController
 {
     protected $navManager;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $accesslevel)
     {
-        parent::__construct($twig);
+        parent::__construct($twig, $accesslevel);
         $this->navManager = NavManager::getInstance();
     }
 

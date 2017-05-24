@@ -19,9 +19,9 @@ class fileController extends BaseController
     protected $navManager;
     protected $sessionManager;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $accesslevel)
     {
-        parent::__construct($twig);
+        parent::__construct($twig, $accesslevel);
         $this->fileManager = FileManager::getInstance();
         $this->userManager = UserManager::getInstance();
         $this->securityManager = SecurityManager::getInstance();
@@ -29,8 +29,6 @@ class fileController extends BaseController
         $this->logManager = LogManager::getInstance();
         $this->navManager = NavManager::getInstance();
         $this->sessionManager = SessionManager::getInstance();
-
-        $this->securityManager->isLoggedIn();//todo put it into the routing system.(put bool to enable check for connection of user.)
     }
 
     public function uploadAction(){
