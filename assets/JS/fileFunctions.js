@@ -70,7 +70,7 @@ function asynchronousTreatment(path, successFunction, failureFunction, method){
     request.send();
 }
 
-function toggleFormState(form){
+/*function toggleFormState(form){
     var showForm = true;
     if (form.className.search('appearingSlowly') !== -1){
         showForm = false;
@@ -84,7 +84,7 @@ function toggleFormState(form){
     if (showForm){
         form.className += " appearingSlowly";
     }
-}
+}*/
 
 function writeInFile(id, newContent){
     asynchronousTreatment('?action=write&id='+id+'&newContent='+encodeURIComponent(newContent), function (request) {

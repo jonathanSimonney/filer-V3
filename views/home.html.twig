@@ -52,8 +52,6 @@
                     </div>
                 </div>
 
-                <!-- display rows with files-->
-
                 <div class="row">
                     <div class="col-2">
                         <p><i class="fa fa-file"></i></p>
@@ -67,24 +65,36 @@
                     <div class="col-6 options">
                         <ul>
                             <li>
-                                <i class="fa fa-trash"></i>
-                                <p>delete</p>
+                                <i class="fa fa-trash" title="delete file"></i>
                             </li>
                             <li>
-                                <i class="fa fa-pencil"></i>
-                                <p>rename</p>
+                                <i class="fa fa-pencil" title="rename file"></i>
                             </li>
                             <li>
-                                <i class="fa fa-exchange"></i>
-                                <p>replace</p>
+                                <i class="fa fa-exchange" title="replace file"></i>
                             </li>
                             <li>
-                                <i class="fa fa-download"></i>
-                                <p>download</p>
+                                <i class="fa fa-download" title="download file"></i>
                             </li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- display rows with files-->
+
+                {{ dump() }}
+
+                {% if arrayElement is defined %}
+                    {% set numberForId = 0 %}
+                    {% for key, element in arrayElement %}
+                        {% set numberForId = numberForId + 1 %}
+                        {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
+                            {% include 'inc/folder.html.twig' with {'folder':element} %}
+                        {% else %}
+                            {% include 'inc/file.html.twig' with {'file':element} %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
 
             <div id="myModal" class="modal">

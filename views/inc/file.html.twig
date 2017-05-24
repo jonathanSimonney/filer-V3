@@ -1,4 +1,4 @@
-<div class='icon '{{ file['type'] }}>
+<!--<div class='icon '{{ file['type'] }}>
     <br><br>
     <a href= "?action=download&fileId={{ file['id'] }}"  class="download clickable"><i class="fa fa-arrow-down" aria-hidden="true"></i></a>
     <a href="#" class="show download clickable"><i class="fa fa-search" aria-hidden="true"></i></a>
@@ -11,24 +11,58 @@
         {{ file['name'] }}<span class="extFile">.{{ file['type'] }}</span>
     </span>
 
-    <form class="replaceForm toHide" action="?action=replace" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <br>
-        <input type="number" name="notForUser" class="notForUser" value="{{ file['id'] }}">
-        <input type="submit" class="button">
-    </form>
-
-    <form class="renameForm toHide" action="?action=rename" method="post">
-        <label for="name{{ numberForId }}" >name : </label>
-        <input type="number" name="notForUser" class="notForUser" value="{{ file['id'] }}">
-        <input type="text" name="name" placeholder="type here the name of your file" id="name{{ numberForId }}"><br>
-        <input type="submit" class="button">
-    </form>
 
 
-    <form class="deleteForm toHide" action="?action=remove" method="post">
-        <input type="number" name="notForUser" class="notForUser" value="{{ file['id'] }}">
-        <p>WARNING : ARE YOU SURE YOU WANT TO DELETE THIS FILE? THIS CAN'T BE UNDONE!</p>
-        <input type="submit" class="button">
-    </form>
+</div>-->
+
+<div class="row">
+    <div class="col-2">
+        <p><i class="fa fa-file"></i> .{{ file['type'] }}</p>
+    </div>
+    <div class="col-3">
+        <p>{{ file['name'] }}</p>
+    </div>
+    <div class="col-1">
+        <p>5 Mo</p>
+    </div>
+    <div class="col-6 options">
+        <ul>
+            <li>
+                <a href= "?action=delete&fileId={{ file['id'] }}"  class="delete clickable">
+                    <i class="fa fa-trash"></i>
+                    <p>delete</p>
+                </a>
+            </li>
+            <li>
+                <form class="renameForm collapsed" action="?action=rename" method="post">
+                    <input type="hidden" name="notForUser" class="notForUser" value="{{ file['id'] }}">
+                    <input class="rename_input " type="text" name="name" placeholder="type here the name of your file" id="name{{ numberForId }}">
+                    <input id="submit_rename{{ numberForId }}" type="submit" class="toHide">
+                    <label for="submit_rename{{ numberForId }}">
+
+                    </label>
+                </form>
+                <label for="name{{ numberForId }}" class="rename clickable">
+                    <i class="fa fa-pencil"></i>
+                    <p>rename</p>
+                </label>
+            </li>
+            <li>
+                <form class="replaceForm toHide" action="?action=replace" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="fileFormReplace{{ numberForId }}">
+                    <input type="hidden" name="notForUser" class="notForUser" value="{{ file['id'] }}">
+                </form>
+                <label for="fileFormReplace{{ numberForId }}" class="replace clickable">
+                    <i class="fa fa-exchange"></i>
+                    <p>replace</p>
+                </label>
+            </li>
+            <li>
+                <a href= "?action=download&fileId={{ file['id'] }}"  class="download clickable">
+                    <i class="fa fa-download"></i>
+                    <p>download</p>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

@@ -20,6 +20,10 @@ a{
     color: $lightgrey;
 }
 
+.toHide{
+    display: none;
+}
+
 //REGISTER PAGE
 
 html{
@@ -43,7 +47,7 @@ html{
                 align-items: center;
 
                 .logo_container{
-                    width: 18%;
+                    width: 15%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -317,7 +321,7 @@ html{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    width: 18%;
+                    width: 15%;
                     background-color: $grey;
 
                     .new_menu{
@@ -514,6 +518,27 @@ html{
                                         i{
                                             margin: 0 5px;
                                         }
+
+                                        .renameForm{
+                                            display: flex;
+                                        }
+
+                                        .collapsed{
+                                            width: 0;
+
+                                            input{
+                                                width: inherit;
+                                                padding: 0;
+                                                border: 0;
+                                            }
+
+                                            label{
+                                                width: inherit;
+                                                padding: 0;
+                                                border: 0;
+                                            }
+
+                                        }
                                     }
                                 }
                             }
@@ -561,7 +586,7 @@ html{
                 .infos{
                     display: flex;
                     flex-direction: column;
-                    width: 23%;
+                    width: 20%;
                     background-color: $white;
                     margin-left: auto;
                     border-left: 2px solid $grey2;
