@@ -1,5 +1,11 @@
+logs/*
+!logs/.htaccess
 /uploads/*
+vendor/*
 !/uploads/.gitkeep
 .idea
 config/private.php
 /node_modules
+.sass-cache/*
+*.css.map
+composer.phar
