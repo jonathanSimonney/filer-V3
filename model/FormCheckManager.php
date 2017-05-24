@@ -33,7 +33,7 @@ class FormCheckManager extends BaseManager
     }
 
     protected function isNotAlreadyInDb($needle, $column, $table){
-        if (getWhatHow($needle, $column, $table)){
+        if ($this->dbManager->getWhatHow($needle, $column, $table)){
             $_SESSION['errorMessage'] .= "Sorry, but the ".$column." <i>".htmlspecialchars($needle)."</i> is already taken, please choose another one.<br>";
         }
     }
