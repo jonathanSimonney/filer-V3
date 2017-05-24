@@ -41,7 +41,7 @@ class defaultController extends BaseController
             $arrayElements = [];
         }
 
-        echo $this->renderView('home.html.twig', ['location' => $_SESSION['location'], 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
+        echo $this->renderView('home.html.twig', ['tree' => $_SESSION['files'], 'location' => $_SESSION['location'], 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
 
 
 
@@ -70,7 +70,7 @@ class defaultController extends BaseController
             header('Location: ?action=home');
             exit(0);
         }
-        
+
         header('Location: ?action=login');
         exit(0);
     }
