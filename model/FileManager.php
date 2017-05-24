@@ -36,7 +36,7 @@ class FileManager extends BaseManager
 
         if ($_SESSION['location']['files'] !== null){
             foreach ($_SESSION['location']['files'] as $key => $value){
-                if ($value['type'] === ''){
+                if ($value['isFolder']){
                     $this->suppressRecursively($value);
                 }else{
                     unlink($this->getRealPathToFile($value));
@@ -92,7 +92,7 @@ class FileManager extends BaseManager
     }
 
     public function suppressFile($fileData){
-        if ($fileData['type'] !== ''){
+        if (!$fileData['isFolder']){
             unlink($this->getRealPathToFile($fileData));
             $this->dbManager->removeFromDb('files',$fileData['id']);
         }else{
@@ -104,7 +104,7 @@ class FileManager extends BaseManager
 
     public function formatNewFileData($oldFileData){
         $newFileData['name'] = $this->formatFileName($_POST['name'], $oldFileData['type']);
-        if ($oldFileData['type'] === ''){
+        if ($oldFileData['isFolder']){
             $newFileData['path'] = preg_replace('/'.preg_quote($oldFileData['name'], NULL).'(?!.)/', $newFileData['name'], $oldFileData['path']);
         }else{
             //following regexp is supposed to select the oldFileName only if it is followed by its type with nothing behind.
@@ -259,6 +259,7 @@ class FileManager extends BaseManager
 
         if ($this->uploadFileInFolder($file, $path)){
             $fileInformations['date'] = date("Y-m-d H:i:s");
+            $fileInformations['isFolder'] = false;
             $this->uploadFileInDb($fileInformations);
             $this->sessionManager->uploadFileInSession($fileInformations);
         }
@@ -266,6 +267,8 @@ class FileManager extends BaseManager
 
     public function addFolder($folderInformations){
         mkdir($this->getRealPathToFile($folderInformations));
+        $folderInformations['date'] = date('Y-m-d H:i:s');
+        $folderInformations['isFolder'] = true;
         $this->uploadFileInDb($folderInformations);
         $this->sessionManager->uploadFileInSession($folderInformations);
     }
@@ -282,7 +285,7 @@ class FileManager extends BaseManager
 
     public function getNameWithExtent($fileOrFolderData){
         $name = $fileOrFolderData['name'];
-        if ($fileOrFolderData['type'] !== ''){
+        if (!$fileOrFolderData['isFolder']){
             $name .= '.'.$fileOrFolderData['type'];
         }
 
@@ -294,7 +297,7 @@ class FileManager extends BaseManager
         $arrayFolders = [];
 
         foreach ($arrayToOrder as $key => $value){
-            if ($value['type'] === ''){
+            if ($value['isFolder']){
                 $arrayFolders[] = $value;
             }else{
                 $value['filesize'] = filesize($this->getRealPathToFile($value));
