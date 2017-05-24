@@ -4,8 +4,6 @@ namespace controllers;
 
 use Model\NavManager;
 
-require_once 'model/nav.php';
-
 class navController extends BaseController
 {
     protected $navManager;

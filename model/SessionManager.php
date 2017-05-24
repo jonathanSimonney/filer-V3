@@ -108,7 +108,7 @@ class SessionManager extends BaseManager
                 $newData = $this->updatePath((int)$cor[0], $suppressedArray, $key, $path);
                 $suppressedArray = $newData['suppressedArray'];
                 $path = $newData['path'];
-            }
+            }//we update the suppressedArray and the path, replacing the number for parent id by the path of this parent, if it was already suppressed
 
             if ($this->getItemInArray($path, $arrayAsTree) !== null){
                 $value = array_merge($this->getItemInArray($path, $arrayAsTree), $value);

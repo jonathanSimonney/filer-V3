@@ -258,6 +258,7 @@ class FileManager extends BaseManager
         $path = $this->getRealPathToFile($fileInformations);
 
         if ($this->uploadFileInFolder($file, $path)){
+            $fileInformations['date'] = date("Y-m-d H:i:s");
             $this->uploadFileInDb($fileInformations);
             $this->sessionManager->uploadFileInSession($fileInformations);
         }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 15 Mai 2017 à 14:38
+-- Généré le :  Mer 24 Mai 2017 à 16:20
 -- Version du serveur :  5.6.17-log
 -- Version de PHP :  7.0.3
 
@@ -33,8 +33,9 @@ CREATE TABLE IF NOT EXISTS `files` (
   `path` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT '2016-10-24 10:23:47',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=206 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `indic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
