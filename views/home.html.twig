@@ -44,18 +44,31 @@
 
             <div class="tree">
                 <div class="nav">
-                    <i class="fa fa-caret-right"></i>
-                    <i class="fa fa-caret-down"></i>
-                    <i class="fa fa-folder"></i>
-                    <p>Main</p>
+                    <a href="#">
+                        <i class="fa fa-caret-right"></i>
+                        <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-folder"></i>
+                        <p>Filer</p>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="main_content">
             <div class="path">
-                <h5>current path</h5>
+                <a class="back_button" href="#"><i class="fa fa-chevron-left"></i></a> <!-- go back -->
+                <a href="#"><h5>Filer</h5></a>
                 <i class="fa fa-chevron-right"></i>
-                <h5>...</h5>
+                {% for key, element in tree %}
+                    {% if element['isFolder'] %}
+                        {% if element['id'] %} {# id Get #}
+                            <a href="#"><h5>{{ element['name'] }}</h5></a>
+                            <i class="fa fa-chevron-right"></i>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="error_container">
+                <p>{{ errorMessage }}</p>
             </div>
             <div class="rows_container">
                 <div class="main_row">
@@ -99,7 +112,7 @@
 
 
 
-    
+
 
     <script src="assets/JS/dragAndDropHandler.js"></script>
     <script src="assets/JS/fileFunctions.js"></script>

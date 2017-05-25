@@ -394,13 +394,18 @@ html body #main_container .home_container_desktop .sidebar .tree .nav {
   align-items: center;
   padding: 13px 0 13px 12.5%;
 }
-html body #main_container .home_container_desktop .sidebar .tree .nav .fa-caret-right {
+html body #main_container .home_container_desktop .sidebar .tree .nav a {
+  display: flex;
+  align-items: center;
+  color: #eff1f3;
+}
+html body #main_container .home_container_desktop .sidebar .tree .nav a .fa-caret-right {
   margin: 0 5px;
 }
-html body #main_container .home_container_desktop .sidebar .tree .nav .fa-caret-down {
+html body #main_container .home_container_desktop .sidebar .tree .nav a .fa-caret-down {
   display: none;
 }
-html body #main_container .home_container_desktop .sidebar .tree .nav .fa-folder {
+html body #main_container .home_container_desktop .sidebar .tree .nav a .fa-folder {
   margin: 0 10px;
 }
 html body #main_container .home_container_desktop .sidebar .tree .nav:hover, html body #main_container .home_container_desktop .sidebar .tree .nav:focus {
@@ -422,12 +427,34 @@ html body #main_container .home_container_desktop .main_content {
   align-items: center;
   padding: 10px 0;
 }
+html body #main_container .home_container_desktop .main_content .error_container {
+  color: #d43a0a;
+}
 html body #main_container .home_container_desktop .main_content .path {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 0 2.5%;
   margin: 15px 0;
+}
+html body #main_container .home_container_desktop .main_content .path .back_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 33px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: #e9ebec;
+}
+html body #main_container .home_container_desktop .main_content .path a {
+  padding: 5px;
+  color: #364851;
+  border-radius: 5px;
+}
+html body #main_container .home_container_desktop .main_content .path a:hover {
+  background-color: #b5bec2;
+  text-decoration: none;
 }
 html body #main_container .home_container_desktop .main_content .path .fa-chevron-right {
   margin: 0 7px 0 3px;

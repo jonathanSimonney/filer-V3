@@ -460,16 +460,22 @@ html{
                             align-items: center;
                             padding: 13px 0 13px 12.5%;
 
-                            .fa-caret-right{
-                                margin: 0 5px;
-                            }
+                            a{
+                                display: flex;
+                                align-items: center;
+                                color: $white;
 
-                            .fa-caret-down{
-                                display: none;
-                            }
+                                .fa-caret-right{
+                                    margin: 0 5px;
+                                }
 
-                            .fa-folder{
-                                margin: 0 10px;
+                                .fa-caret-down{
+                                    display: none;
+                                }
+
+                                .fa-folder{
+                                    margin: 0 10px;
+                                }
                             }
                         }
                         .nav:hover, .nav:focus{
@@ -496,12 +502,37 @@ html{
                     align-items: center;
                     padding: 10px 0;
 
+                    .error_container{
+                        color: $orangebrick;
+                    }
+
                     .path{
                         display: flex;
                         align-items: center;
                         width: 100%;
                         padding: 0 2.5%;
                         margin: 15px 0;
+
+                        .back_button{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 33px;
+                            height: 33px;
+                            margin-right: 10px;
+                            border-radius: 50%;
+                            background-color: $lightgrey;
+                        }
+
+                        a{
+                            padding: 5px;
+                            color: $grey;
+                            border-radius: 5px;
+                        }
+                        a:hover{
+                            background-color: $greymedium;
+                            text-decoration: none;
+                        }
 
                         .fa-chevron-right{
                             margin: 0 7px 0 3px;
