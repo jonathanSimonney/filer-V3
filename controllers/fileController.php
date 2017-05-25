@@ -187,7 +187,6 @@ class fileController extends BaseController
     }
 
     public function writeAction(){
-        var_dump($_GET, $_POST);
         $fileData = $this->fileManager->getFileData($_GET['id']);
         http_response_code(400);
         if ($this->securityManager->userCanAccess($fileData)){

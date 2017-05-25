@@ -26,7 +26,7 @@ class defaultController extends BaseController
     }
 
     public function homeAction(){
-        $_SESSION['location']['files'] = $this->sessionManager->getItemInArray($_SESSION['location']['array'],$_SESSION);
+        $_SESSION['location']['files'] = $this->sessionManager->getItemInArray($_SESSION['location']['array'],$_SESSION) ?? [];
         $arrayElements = $_SESSION['location']['files'];
 
         //var_dump($arrayElements, $_SESSION['location'], $_SESSION['files']);

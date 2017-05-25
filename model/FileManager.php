@@ -86,7 +86,6 @@ class FileManager extends BaseManager
             if (array_key_exists($fileId, $_SESSION['location']['files'])){
                 return $_SESSION['location']['files'][$fileId];
             }
-            var_dump($this->dbManager->getWhatHow($fileId, 'id', 'files'), $fileId);
             return $this->dbManager->getWhatHow($fileId, 'id', 'files')[0];
         }
         return ['name' => 'root', 'id' => 'root', 'path' => 'uploads/'.$_SESSION['currentUser']['data']['id']];
@@ -256,22 +255,21 @@ class FileManager extends BaseManager
     }
 
     public function makeUpload($file, $fileInformations){
+        $fileInformations['isFolder'] = (int)false;//workaround for newer version of mySQL, who don't like the empty string,
+        // but convert anything given to execute to a string representation. Problem is that string representation of false is '', which generates warning from mySQL...
         $path = $this->getRealPathToFile($fileInformations);
-
         if ($this->uploadFileInFolder($file, $path)){
             $fileInformations['date'] = date("Y-m-d H:i:s");
-            $fileInformations['isFolder'] = (int)false;//workaround for newer version of mySQL, who don't like the empty string,
-            // but convert anything given to execute to a string representation. Problem is that string representation of false is '', which generates warning from mySQL...
             $this->uploadFileInDb($fileInformations);
             $this->sessionManager->uploadFileInSession($fileInformations);
         }
     }
 
     public function addFolder($folderInformations){
-        mkdir($this->getRealPathToFile($folderInformations));
-        $folderInformations['date'] = date('Y-m-d H:i:s');
         $folderInformations['isFolder'] = (int)true;//workaround for newer version of mySQL, who don't like the empty string,
         // but convert anything given to execute to a string representation. Problem is that string representation of false is '', which generates warning from mySQL...
+        mkdir($this->getRealPathToFile($folderInformations));
+        $folderInformations['date'] = date('Y-m-d H:i:s');
         $this->uploadFileInDb($folderInformations);
         $this->sessionManager->uploadFileInSession($folderInformations);
     }
