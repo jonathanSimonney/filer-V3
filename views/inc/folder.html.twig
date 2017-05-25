@@ -1,39 +1,10 @@
-<!--<div class='icon folder'>
-    <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-    <br><br>
-    <a href="?action=open&fileId={{ folder['id'] }}" class="download clickable">
-        <i class="fa fa-folder" aria-hidden="true"></i>
-    </a>
-    <button class="rename clickable">rename</button>
-    <i class="fa fa-trash delete clickable" aria-hidden="true"></i>
-
-    <span class="name">
-    <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-        {{ folder['name'] }}
-</span>
-
-    <form class="renameForm toHide" action="?action=rename" method="post">
-        <label for="name{{ folder['id'] }}" >name : </label>
-        <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-        <input type="text" name="name" placeholder="type here the name of your file" id=name{{ numberForId }}><br>
-        <input type="submit" class="button">
-    </form>
-
-
-    <form class="deleteForm toHide" action="?action=remove" method="post">
-        <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-        <p>WARNING : ARE YOU SURE YOU WANT TO DELETE THIS FILE? THIS CAN'T BE UNDONE!</p>
-        <input type="submit" class="button">
-    </form>
-</div>-->
-
-<div class="row folder draggableElem" id="{{ folder['id'] }}">
+<div class="row folder draggableElem draggable_hover" id="{{ folder['id'] }}">
     <div class="col-1">
         <p><i class="fa fa-folder"></i></p>
     </div>
     <div class="col-2">
         <a href="?action=open&fileId={{ folder['id'] }}" class="download clickable">
-            <p class="name">{{ folder['name']|slice(start,15) }}</p>
+            <p class="name draggable">{{ folder['name']|slice(start,15) }}</p>
         </a>
     </div>
     <div class="col-2">
