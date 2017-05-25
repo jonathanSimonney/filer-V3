@@ -9,19 +9,13 @@ use Model\UserManager;
 
 class defaultController extends BaseController
 {
-    protected $dbManager;
-    protected $userManager;
-    protected $securityManager;
     protected $sessionManager;
     protected $fileManager;
 
     public function __construct(\Twig_Environment $twig, $accessLevel)
     {
         parent::__construct($twig, $accessLevel);
-        $this->dbManager = DbManager::getInstance();
         $this->sessionManager = SessionManager::getInstance();
-        $this->securityManager = SecurityManager::getInstance();
-        $this->userManager = UserManager::getInstance();
         $this->fileManager = FileManager::getInstance();
     }
 
@@ -33,7 +27,6 @@ class defaultController extends BaseController
 
 
         if ($arrayElements !== null){
-
             $arrayElements = $this->fileManager->orderBetweenFilesAndFolder($arrayElements);
         }
         else
@@ -41,7 +34,9 @@ class defaultController extends BaseController
             $arrayElements = [];
         }
 
-        echo $this->renderView('home.html.twig', ['errorMessage' => $_SESSION['errorMessage'], 'tree' => $_SESSION['files'], 'location' => $_SESSION['location'], 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
+        $simpleLocation = $this->sessionManager->getSimpleLocationArray($_SESSION['location'], $_SESSION['files']);
+
+        echo $this->renderView('home.html.twig', ['errorMessage' => $_SESSION['errorMessage'], 'tree' => $_SESSION['files'], 'location' => $simpleLocation, 'arrayElement' => $arrayElements, 'currentUser' => $_SESSION['currentUser']['data']['username']]);
 
 
 

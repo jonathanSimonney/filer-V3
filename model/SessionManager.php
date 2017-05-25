@@ -149,4 +149,24 @@ class SessionManager extends BaseManager
             $this->setItemInArray(array_merge($_SESSION['location']['array'], [$destinationFolderData['id'], 'childs', $movedElementData['id']]), $_SESSION, $copiedElement);
         }
     }
+
+    public function getSimpleLocationArray($location, $tree)
+    {
+        $ret = ['root'];
+        $locationPointer = ['files'];
+
+        if (count($location) === 1){
+            return $ret;
+        }
+        
+        for ($i = 1, $iMax = count($location['array']); $i < $iMax; $i += 1)
+        {
+            $locationPointer[] = $location['array'][$i];
+            $ret[] = $this->getItemInArray($locationPointer, $_SESSION)['name'];
+            $locationPointer[] = 'childs';
+            $i++;
+        }
+
+        return $ret;
+    }
 }
