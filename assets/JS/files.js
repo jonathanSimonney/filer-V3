@@ -42,21 +42,12 @@ window.onload = function(){
         linkFolderEvent(value.id);
     });
 
-    //D&D handler
-
-    buttonFolder.onclick = function () {
-        toggleFormState(document.querySelector('.addFolder'));
-    };
-
-    buttonUpload.onclick = function(){
-        toggleFormState(document.querySelector('.uploadForm'));
-    };
-
     function FileConvertSize(aSize){
         aSize = Math.abs(parseInt(aSize, 10));
-        var def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+        var def = [[1, 'o'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
         for(var i=0; i<def.length; i++){
-            if(aSize<def[i][0]) return (aSize/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
+            if(aSize == '0') return ('0');
+            if(aSize<=def[i][0]) return (aSize/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
         }
     }
 
@@ -95,41 +86,7 @@ window.onload = function(){
         $(this).parents('.fileFormReplace').submit();
     });
 
-    for (var i in buttonRename){
-        if (typeof buttonRename[i].style != 'undefined') {
-            buttonRename[i].onclick = function(){
-                var arrayElements = this.parentNode.childNodes;
-                for (var i in arrayElements){
-                    if (typeof arrayElements[i].style != 'undefined') {
-                        if (arrayElements[i].className.indexOf("renameForm") != -1) {
-                            var toShowForm = arrayElements[i];
-                            break;
-                        }
-                    }
-                }
 
-                /*toggleFormState(toShowForm);*/
-            }
-        }
-    }
-
-    for (var i in buttonDelete){
-        if (typeof buttonDelete[i].style != 'undefined') {
-            buttonDelete[i].onclick = function(){
-                var arrayElements = this.parentNode.childNodes;
-                for (var i in arrayElements){
-                    if (typeof arrayElements[i].style != 'undefined') {
-                        if (arrayElements[i].className.indexOf("deleteForm") != -1) {
-                            var toShowForm = arrayElements[i];
-                            break;
-                        }
-                    }
-                }
-
-                /*toggleFormState(toShowForm);*/
-            }
-        }
-    }
 
     $('.show').click(function (e) {
         e.preventDefault();
