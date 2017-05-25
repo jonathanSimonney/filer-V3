@@ -158,7 +158,7 @@ class SessionManager extends BaseManager
         if (count($location) === 1){
             return $ret;
         }
-        
+
         for ($i = 1, $iMax = count($location['array']); $i < $iMax; $i += 1)
         {
             $locationPointer[] = $location['array'][$i];

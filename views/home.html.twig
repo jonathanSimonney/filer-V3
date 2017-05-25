@@ -107,7 +107,8 @@
     <script src="assets/JS/files.js"></script>
 
 
-    {% for key, elem in tree %}
+    {#
+        {% for key, elem in tree %}
         {% for subelem in elem %}
             {{ subelem }}
             {% for child in subelem['childs'] %}
@@ -118,5 +119,6 @@
             {% endif %}
         {% endfor %}
     {% endfor %}
+    #}
 
 {% endblock %}

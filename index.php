@@ -3,6 +3,7 @@ use Router\Router;
 use Symfony\Component\Yaml\Yaml;
 
 session_start();
+error_reporting(0);
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -21,11 +22,11 @@ $action = $_GET['action'];
 
 $loader = new Twig_Loader_Filesystem('views/');
 $twig = new Twig_Environment($loader, array(//todo activate cache, deactivate debug BEFORE FINAL COMMIT! IMPORTANT!!!!
-    // 'cache' => 'cache/twig/',
-    'cache' => false,
-    'debug' => true
+    'cache' => 'cache/twig/',
+    //'cache' => false,
+    //'debug' => true
 ));
-$twig->addExtension(new Twig_Extension_Debug());//todo activate cache, deactivate debug BEFORE FINAL COMMIT! IMPORTANT!!!!
+//$twig->addExtension(new Twig_Extension_Debug());//todo activate cache, deactivate debug BEFORE FINAL COMMIT! IMPORTANT!!!!
 
 $router = new Router($publicConfig['routes'], $twig);
 $router->callAction($action);

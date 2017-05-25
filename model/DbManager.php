@@ -125,8 +125,7 @@ class DbManager extends BaseManager
 
         $query .= ' WHERE `'.$table.'`.`id` = '.$id;
 
-        /*echo $query;
-        var_dump($fieldToUpdateData);*/
+
         $sth = $dbh->prepare($query);
         $sth->execute($fieldToUpdateData);
     }
