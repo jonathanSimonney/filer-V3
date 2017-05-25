@@ -472,7 +472,7 @@ html body #main_container .home_container_desktop .main_content .rows_container 
 html body #main_container .home_container_desktop .main_content .rows_container .main_row {
   display: flex;
   width: 100%;
-  background-color: #eff1f3;
+  background-color: #212a2f;
   border-radius: 5px 5px 0 0;
   padding: 5px 0 0 0;
 }
@@ -481,11 +481,12 @@ html body #main_container .home_container_desktop .main_content .rows_container 
   border-bottom: 2px solid #364851;
 }
 html body #main_container .home_container_desktop .main_content .rows_container .main_row div b {
-  color: #364851;
+  color: #eff1f3;
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row {
   width: 100%;
   background-color: #eff1f3;
+  border-bottom: 2px solid #cfd8dc;
   padding: 5px 0;
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row div {
@@ -493,6 +494,13 @@ html body #main_container .home_container_desktop .main_content .rows_container 
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row div a {
   color: #364851;
+}
+html body #main_container .home_container_desktop .main_content .rows_container .row div a:hover {
+  text-decoration: none;
+}
+html body #main_container .home_container_desktop .main_content .rows_container .row div .draggable:hover, html body #main_container .home_container_desktop .main_content .rows_container .row div .draggable_hover {
+  cursor: pointer;
+  background-color: #cfd8dc;
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row .options {
   display: flex;
@@ -564,6 +572,9 @@ html body #main_container .home_container_desktop .main_content .rows_container 
   border-left: 3px solid #364851;
   background-color: #212a2f;
   color: #ff4c0a;
+}
+html body #main_container .home_container_desktop .main_content .rows_container .row .options ul li:hover {
+  background-color: #cfd8dc;
 }
 html body #main_container .home_container_desktop .infos {
   display: flex;

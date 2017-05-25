@@ -1,9 +1,9 @@
-<div class="row file draggableElem" id="{{ file['id'] }}">
+<div class="row file draggableElem draggable_hover" id="{{ file['id'] }}">
     <div class="col-1">
         <p><i class="fa fa-file"></i> .{{ file['type'] }}</p>
     </div>
     <div class="col-2">
-        <p class="name">{{ file['name']|slice(start,21) }}</p>
+        <p class="name draggable" title="Select to drag">{{ file['name']|slice(start,21) }}</p>
     </div>
     <div class="col-2">
         <p class="fileSize">{{ file['filesize'] }}</p>

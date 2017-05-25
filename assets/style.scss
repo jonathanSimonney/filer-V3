@@ -552,7 +552,7 @@ html{
                         .main_row{
                             display: flex;
                             width: 100%;
-                            background-color: $white;
+                            background-color: $dark;
                             border-radius: 5px 5px 0 0;
                             padding: 5px 0 0 0;
 
@@ -561,13 +561,14 @@ html{
                                 border-bottom: 2px solid $grey;
 
                                 b{
-                                    color: $grey;
+                                    color: $white;
                                 }
                             }
                         }
                         .row{
                             width: 100%;
                             background-color: $white;
+                            border-bottom: 2px solid $grey2;
                             padding: 5px 0;
 
                             div{
@@ -575,6 +576,15 @@ html{
 
                                 a{
                                    color: $grey;
+                                }
+
+                                a:hover{
+                                    text-decoration: none;
+                                }
+
+                                .draggable:hover, .draggable_hover{
+                                    cursor: pointer;
+                                    background-color: $grey2;
                                 }
                             }
 
@@ -658,6 +668,9 @@ html{
                                             background-color: $dark;
                                             color: $orange;
                                         }
+                                    }
+                                    li:hover{
+                                        background-color: $grey2;
                                     }
                                 }
                             }
