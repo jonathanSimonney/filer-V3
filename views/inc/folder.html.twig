@@ -27,12 +27,12 @@
     </form>
 </div>-->
 
-<div class="row folder" id="{{ folder['id'] }}">
+<div class="row folder draggableElem" id="{{ folder['id'] }}">
     <div class="col-1">
         <p><i class="fa fa-folder"></i></p>
     </div>
     <div class="col-2">
-        <p>{{ folder['name']|slice(start,15) }}</p>
+        <p class="name">{{ folder['name']|slice(start,15) }}</p>
     </div>
     <div class="col-2">
         <p class="fileSize"></p>

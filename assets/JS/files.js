@@ -12,7 +12,7 @@ window.onload = function(){
     //D&D handler
 
     var fileName = document.querySelectorAll('.name');
-    var folder = document.querySelectorAll('.folder');
+    var folder = document.querySelectorAll('.folder .name');
     var precedent = document.querySelector('.precedent');
 
     for (var i in fileName){
@@ -20,6 +20,9 @@ window.onload = function(){
             fileName[i].draggable = true;
             fileName[i].addEventListener('dragstart', function (e) {
                 dragFileOrFolder(this, e);
+            });
+            fileName[i].addEventListener('dragend', function (e) {
+                idMovedElement = 0;
             })
         }
     }
