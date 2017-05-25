@@ -70,21 +70,65 @@ function asynchronousTreatment(path, successFunction, failureFunction, method){
     request.send();
 }
 
-/*function toggleFormState(form){
-    var showForm = true;
-    if (form.className.search('appearingSlowly') !== -1){
-        showForm = false;
-    }
-    var toHide = document.querySelectorAll('.appearingSlowly');
-    for (var i in toHide){
-        if (typeof toHide[i].style != 'undefined') {
-            toHide[i].className = toHide[i].className.replace('appearingSlowly','');
-        }
-    }
-    if (showForm){
-        form.className += " appearingSlowly";
-    }
-}*/
+function linkFolderEvent(folderId) {
+    $('#'+folderId+' .delete').click(function() {
+        $('.modal-body').html('Are you sure you want to delete this file?');
+
+        $('.btn-confirm').click(function(){
+            $(location).attr('href',"?action=remove&fileId="+folderId);
+        });
+    });
+
+    $('#'+folderId+' .rename').click(function() {
+        $('.modal-body').html("<input class='rename_input ' type='text' name='name' placeholder=' type here the new name' id='name"+folderId+"'>");
+
+        $('.btn-confirm').click(function(){
+            var nameModal = $('.rename_input').val();
+            $('#'+folderId+' .renameForm').find('.rename_input').val(nameModal);
+            $('#'+folderId+' .renameForm').submit();
+        });
+    });
+}
+
+function linkFileEvent(fileId) {
+    var input = document.querySelector('#fileFormReplace'+fileId);
+    var label = document.querySelector('.label_choose_file');
+    var labelVal = label.innerHTML;
+
+    input.addEventListener( 'change', function( e )
+    {
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+            fileName = e.target.value.split( '\\' ).pop();
+
+        fileName = fileName.substring(0,13);
+
+        if( fileName )
+            label.innerHTML = fileName;
+        else
+            label.innerHTML = labelVal;
+    });
+
+    $('#'+fileId+' .delete').click(function() {
+        $('.modal-body').html('Are you sure you want to delete this file?');
+
+        $('.btn-confirm').click(function(){
+            $(location).attr('href',"?action=remove&fileId="+fileId);
+        });
+    });
+
+    $('#'+fileId+' .rename').click(function() {
+        $('.modal-body').html("<input class='rename_input ' type='text' name='name' placeholder=' type here the new name' id='name"+fileId+"'>");
+
+        $('.btn-confirm').click(function(){
+            var nameModal = $('.rename_input').val();
+            $('#'+fileId+' .renameForm').find('.rename_input').val(nameModal);
+            $('#'+fileId+' .renameForm').submit();
+        });
+    });
+}
 
 function writeInFile(id, newContent){
     asynchronousTreatment('?action=write&id='+id+'&newContent='+encodeURIComponent(newContent), function (request) {

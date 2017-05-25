@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row file" id="{{ file['id'] }}">
     <div class="col-1">
         <p><i class="fa fa-file"></i> .{{ file['type'] }}</p>
     </div>
@@ -22,22 +22,22 @@
                 <form class="renameForm collapsed" action="?action=rename" method="post">
                     <input type="hidden" name="notForUser" class="notForUser" value="{{ file['id'] }}">
                     <input class="rename_input " type="text" name="name" placeholder="type the new name" id="name{{ numberForId }}">
-                    <input id="submit_rename{{ numberForId }}" type="submit" class="toHide">
-                    <label for="submit_rename{{ numberForId }}">
+                    <input id="submit_rename{{ file['id'] }}" type="submit" class="toHide">
+                    <label for="submit_rename{{ file['id'] }}">
                     </label>
                 </form>
-                <label for="name{{ numberForId }}" class="rename clickable" data-toggle="modal" data-target="#myModal">
+                <label for="name{{ file['id'] }}" class="rename clickable" data-toggle="modal" data-target="#myModal">
                     <i class="fa fa-pencil" title="rename file"></i>
                 </label>
             </li>
             <li>
                 <form class="replaceForm collapsed" action="?action=replace" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" id="fileFormReplace{{ numberForId }}" data-multiple-caption="{count} files selected" class="toHide">
-                    <label for="fileFormReplace{{ numberForId }}" class="label_choose_file">
+                    <input type="file" name="file" id="fileFormReplace{{ file['id'] }}" data-multiple-caption="{count} files selected" class="toHide">
+                    <label for="fileFormReplace{{ file['id'] }}" class="label_choose_file">
                     </label>
                     <input type="hidden" name="notForUser" class="notForUser" value="{{ file['id'] }}">
-                    <input id="submit_replace{{ numberForId }}" type="submit" class="toHide">
-                    <label for="submit_replace{{ numberForId }}" class="label_confirm">
+                    <input id="submit_replace{{ file['id'] }}" type="submit" class="toHide">
+                    <label for="submit_replace{{ file['id'] }}" class="label_confirm">
                     </label>
                 </form>
                 <label class="replace clickable ">
@@ -58,45 +58,3 @@
         </ul>
     </div>
 </div>
-<script>
-
-    var input = document.querySelector('#fileFormReplace{{ numberForId }}');
-    var label = document.querySelector('.label_choose_file');
-    var labelVal = label.innerHTML;
-
-    input.addEventListener( 'change', function( e )
-    {
-        var fileName = '';
-        if( this.files && this.files.length > 1 )
-            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-        else
-            fileName = e.target.value.split( '\\' ).pop();
-
-        fileName = fileName.substring(0,13);
-
-        if( fileName )
-            label.innerHTML = fileName;
-        else
-            label.innerHTML = labelVal;
-    });
-
-    $('.delete').click(function() {
-        $('.modal-body').html('Are you sure you want to delete this file?');
-
-        $('.btn-confirm').click(function(){
-            $(location).attr('href',"?action=remove&fileId={{ file['id'] }}");
-        });
-    });
-
-    $('.rename').click(function() {
-        $('.modal-body').html("<input class='rename_input ' type='text' name='name' placeholder=' type here the new name' id='name{{ numberForId }}'>");
-
-        $('.btn-confirm').click(function(){
-            var nameModal = $('.rename_input').val();
-            $('.renameForm').find('.rename_input').val(nameModal);
-            $('.renameForm').submit();
-        });
-    });
-
-
-</script>

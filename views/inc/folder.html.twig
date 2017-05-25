@@ -1,28 +1,64 @@
-<div class='icon folder'>
-<input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-<br><br>
-<a href="?action=open&fileId={{ folder['id'] }}" class="download clickable">
-    <i class="fa fa-folder" aria-hidden="true"></i>
-</a>
-<button class="rename clickable">rename</button>
-<i class="fa fa-trash delete clickable" aria-hidden="true"></i>
-
-<span class="name">
+<!--<div class='icon folder'>
     <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-    {{ folder['name'] }}
+    <br><br>
+    <a href="?action=open&fileId={{ folder['id'] }}" class="download clickable">
+        <i class="fa fa-folder" aria-hidden="true"></i>
+    </a>
+    <button class="rename clickable">rename</button>
+    <i class="fa fa-trash delete clickable" aria-hidden="true"></i>
+
+    <span class="name">
+    <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
+        {{ folder['name'] }}
 </span>
 
-<form class="renameForm toHide" action="?action=rename" method="post">
-    <label for="name{{ numberForId }}" >name : </label>
-    <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-    <input type="text" name="name" placeholder="type here the name of your file" id=name{{ numberForId }}><br>
-    <input type="submit" class="button">
-</form>
+    <form class="renameForm toHide" action="?action=rename" method="post">
+        <label for="name{{ folder['id'] }}" >name : </label>
+        <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
+        <input type="text" name="name" placeholder="type here the name of your file" id=name{{ numberForId }}><br>
+        <input type="submit" class="button">
+    </form>
 
 
-<form class="deleteForm toHide" action="?action=remove" method="post">
-    <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
-    <p>WARNING : ARE YOU SURE YOU WANT TO DELETE THIS FILE? THIS CAN'T BE UNDONE!</p>
-    <input type="submit" class="button">
-</form>
+    <form class="deleteForm toHide" action="?action=remove" method="post">
+        <input type="number" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
+        <p>WARNING : ARE YOU SURE YOU WANT TO DELETE THIS FILE? THIS CAN'T BE UNDONE!</p>
+        <input type="submit" class="button">
+    </form>
+</div>-->
+
+<div class="row folder" id="{{ folder['id'] }}">
+    <div class="col-1">
+        <p><i class="fa fa-folder"></i></p>
+    </div>
+    <div class="col-2">
+        <p>{{ folder['name']|slice(start,15) }}</p>
+    </div>
+    <div class="col-2">
+        <p class="fileSize"></p>
+    </div>
+    <div class="col-2">
+        <p>{{ folder['date'] }}</p>
+    </div>
+    <div class="col-5 options">
+        <ul>
+            <li>
+                <a href= "?action=remove&fileId={{ folder['id'] }}"  class="delete clickable" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-trash" title="delete file"></i>
+                </a>
+            </li>
+            <li>
+                <form class="renameForm collapsed" action="?action=rename" method="post">
+                    <input type="hidden" name="notForUser" class="notForUser" value="{{ folder['id'] }}">
+                    <input class="rename_input " type="text" name="name" placeholder="type the new name" id="name{{ folder['id'] }}">
+                    <input id="submit_rename{{ folder['id'] }}" type="submit" class="toHide">
+                    <label for="submit_rename{{ folder['id'] }}">
+                    </label>
+                </form>
+                <label for="name{{ folder['id'] }}" class="rename clickable" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-pencil" title="rename file"></i>
+                </label>
+            </li>
+        </ul>
+    </div>
 </div>

@@ -34,6 +34,14 @@ window.onload = function(){
         linkArrowDragAndDropEvent(precedent);
     }
 
+    $.each($('.file'), function (index, value) {
+        linkFileEvent(value.id);
+    });
+
+    $.each($('.folder'), function (index, value) {
+        linkFolderEvent(value.id);
+    });
+
     //D&D handler
 
     buttonFolder.onclick = function () {
