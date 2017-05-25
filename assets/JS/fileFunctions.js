@@ -68,12 +68,23 @@ function asynchronousTreatment(path, successFunction, failureFunction, method){
     request.send();
 }
 
+function closeModal() {
+    $('body').removeClass('modal-open');
+    $('#modal_upload_content').removeClass('modal-backdrop fade show');
+    $('#myModal').removeClass('show');
+    $('#myModal').css('display','none');
+}
+
+function openModal() {
+    $('body').addClass('modal-open');
+    $('#modal_upload_content').addClass('modal-backdrop fade show');
+    $('#myModal').addClass('show');
+    $('#myModal').css('display','block');
+}
+
 function linkUploadEvent() {
     $('#file_upload').change(function() {
-        $('body').addClass('modal-open');
-        $('#modal_upload_content').addClass('modal-backdrop fade show');
-        $('#myModal').addClass('show');
-        $('#myModal').css('display','block');
+        openModal();
         $('.modal-body').html("<input id='fileNameModale' type='text' name='name' placeholder=' type here the name of your file'>");
 
         $('.btn-confirm').click(function(){
@@ -84,14 +95,18 @@ function linkUploadEvent() {
             $('.uploadForm').submit();
         });
     });
+
+    $('.btn-cancel').click(function(){
+        closeModal();
+    });
+    $('.close').click(function(){
+        closeModal();
+    });
 }
 
 function linkAddFolderEvent() {
     $('.addFolder_label').click(function() {
-        $('body').addClass('modal-open');
-        $('#modal_upload_content').addClass('modal-backdrop fade show');
-        $('#myModal').addClass('show');
-        $('#myModal').css('display','block');
+        openModal();
         $('.modal-body').html("<input id='folderNameModale' type='text' name='name' placeholder=' type here the name of your folder'>");
 
         $('.btn-confirm').click(function(){
@@ -100,6 +115,13 @@ function linkAddFolderEvent() {
             $('.addFolder').find('#folderName').val(folderNameModale);
             $('.addFolder').submit();
         });
+    });
+
+    $('.btn-cancel').click(function(){
+        closeModal();
+    });
+    $('.close').click(function(){
+        closeModal();
     });
 }
 
