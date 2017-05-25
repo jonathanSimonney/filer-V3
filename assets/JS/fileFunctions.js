@@ -132,9 +132,9 @@ function linkFileEvent(fileId) {
 
 function writeInFile(id, newContent){
     asynchronousTreatment('?action=write&id='+id+'&newContent='+encodeURIComponent(newContent), function (request) {
-        //document.write(request.responseText);
+        $('#debug').html((request.responseText));
     }, function (request) {
-        //document.write(request.responseText);
+        $('#debug').html((request.responseText));
     });
 }
 

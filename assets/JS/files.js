@@ -86,11 +86,9 @@ window.onload = function(){
         $(this).parents('.fileFormReplace').submit();
     });
 
-
-
     $('.show').click(function (e) {
         e.preventDefault();
-        console.log(this.href);
+        openedFileId = $(this).closest('.file').attr('id');
         showInFullScreen(this.href);
     })
 };

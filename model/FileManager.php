@@ -86,6 +86,7 @@ class FileManager extends BaseManager
             if (array_key_exists($fileId, $_SESSION['location']['files'])){
                 return $_SESSION['location']['files'][$fileId];
             }
+            var_dump($this->dbManager->getWhatHow($fileId, 'id', 'files'), $fileId);
             return $this->dbManager->getWhatHow($fileId, 'id', 'files')[0];
         }
         return ['name' => 'root', 'id' => 'root', 'path' => 'uploads/'.$_SESSION['currentUser']['data']['id']];
