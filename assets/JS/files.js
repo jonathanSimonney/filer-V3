@@ -44,19 +44,21 @@ window.onload = function(){
         toggleFormState(document.querySelector('.uploadForm'));
     };
 
-    $('.rename').click(function() {
-        if($(this).siblings('.renameForm').hasClass("collapsed")){
-            $(this).siblings('.renameForm').removeClass('collapsed');
-            $(this).siblings().find('.rename_input').focus();
-            $(this).siblings().find('label').html("<i class='fa fa-check'></i><p>confirm</p>");
-            $(this).html("<i class='fa fa-times'></i>");
+    function FileConvertSize(aSize){
+        aSize = Math.abs(parseInt(aSize, 10));
+        var def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+        for(var i=0; i<def.length; i++){
+            if(aSize<def[i][0]) return (aSize/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
         }
-        else{
-            $(this).siblings('.renameForm').addClass('collapsed');
-            $(this).siblings().find('label').html("");
-            $(this).html("<i class='fa fa-pencil'></i>");
-        }
+    }
+
+    $('.fileSize').each(function () {
+        var fileSize = $(this).html();
+        var convertedFileSize = FileConvertSize(fileSize);
+        $(this).html(convertedFileSize);
     });
+
+
 
     $('.replace').click(function() {
         if($(this).siblings('.replaceForm').hasClass("collapsed")){
@@ -64,19 +66,26 @@ window.onload = function(){
             $(this).siblings().find('.label_choose_file').html("<p>choose a file</p>");
             $(this).siblings().find('.label_confirm').html("<i class='fa fa-check'></i><p>confirm</p>");
             $(this).html("<i class='fa fa-times'></i>");
+            $(this).addClass('close_options');
         }
         else{
             $(this).siblings('.replaceForm').addClass('collapsed');
             $(this).siblings().find('.label_choose_file').html("");
             $(this).siblings().find('.label_confirm').html("");
             $(this).html("<i class='fa fa-exchange'></i>");
+            $(this).removeClass('close_options');
         }
     });
 
 
-    /*$('#fileFormReplace').change(function (){
+    $('.delete').click(function() {
+        $('.modal-body').html('Are you sure you want to delete this file?');
+    });
+
+
+    $('#fileFormReplace').change(function (){
         $(this).parents('.fileFormReplace').submit();
-    });*/
+    });
 
     for (var i in buttonRename){
         if (typeof buttonRename[i].style != 'undefined') {

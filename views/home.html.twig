@@ -5,7 +5,25 @@
         <script src="assets/JS/script.js"></script>
     </head>
 
-     {{ dump() }}
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <b>Some text in the modal.</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-confirm" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-cancel" data-dismiss="modal">No</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="home_container_desktop ">
         <div class="sidebar">
@@ -40,45 +58,20 @@
             </div>
             <div class="rows_container">
                 <div class="main_row">
-                    <div class="col-2">
+                    <div class="col-1">
                         <b>Type</b>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <b>Name</b>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <b>Size</b>
                     </div>
-                    <div class="col-6">
-                        <b>Options</b>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-2">
-                        <p><i class="fa fa-file"></i></p>
+                        <b>Uploaded</b>
                     </div>
-                    <div class="col-3">
-                        <p>test html</p>
-                    </div>
-                    <div class="col-1">
-                        <p>5 Mo</p>
-                    </div>
-                    <div class="col-6 options">
-                        <ul>
-                            <li>
-                                <i class="fa fa-trash" title="delete file"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-pencil" title="rename file"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-exchange" title="replace file"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-download" title="download file"></i>
-                            </li>
-                        </ul>
+                    <div class="col-5">
+                        <b>Options</b>
                     </div>
                 </div>
 
@@ -95,12 +88,6 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-            </div>
-
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                </div>
             </div>
 
         </div>
