@@ -477,6 +477,9 @@ html{
                                     margin: 0 10px;
                                 }
                             }
+                            a:hover{
+                                text-decoration: none;
+                            }
                         }
                         .nav:hover, .nav:focus{
                             background-color: $grey;
@@ -569,6 +572,10 @@ html{
 
                             div{
                                 padding: 5px 2px 2px 10px;
+
+                                a{
+                                   color: $grey;
+                                }
                             }
 
                             .options{

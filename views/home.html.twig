@@ -55,17 +55,9 @@
         </div>
         <div class="main_content">
             <div class="path">
-                <a class="back_button" href="#"><i class="fa fa-chevron-left"></i></a> <!-- go back -->
+                <a class="back_button precedent" href="?action=to_parent"><i class="fa fa-chevron-left"></i></a> <!-- go back -->
                 <a href="#"><h5>Filer</h5></a>
                 <i class="fa fa-chevron-right"></i>
-                {% for key, element in tree %}
-                    {% if element['isFolder'] %}
-                        {% if element['id'] %} {# id Get #}
-                            <a href="#"><h5>{{ element['name'] }}</h5></a>
-                            <i class="fa fa-chevron-right"></i>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
             </div>
             <div class="error_container">
                 <p>{{ errorMessage }}</p>
@@ -110,27 +102,21 @@
         </div>
     </div>
 
-
-
-
-
     <script src="assets/JS/dragAndDropHandler.js"></script>
     <script src="assets/JS/fileFunctions.js"></script>
     <script src="assets/JS/files.js"></script>
 
-    <div class='centeringDiv blueBackground'>
-        <div class='listFilesUser'>
-            {% if arrayElement is defined %}
-                {% set numberForId = 0 %}
-                {% for key, element in arrayElement %}
-                    {% set numberForId = numberForId + 1 %}
-                    {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
-                        {% include 'inc/folder.html.twig' with {'folder':element} %}
-                    {% else %}
-                        {% include 'inc/file.html.twig' with {'file':element} %}
-                    {% endif %}
-                {% endfor %}
+
+    {% for key, elem in tree %}
+        {% for subelem in elem %}
+            {{ subelem }}
+            {% for child in subelem['childs'] %}
+                {{ childKey }}
+            {% endfor %}
+            {% if subelem['isFolder'] == true %}
+
             {% endif %}
-        </div>
-    </div>
+        {% endfor %}
+    {% endfor %}
+
 {% endblock %}

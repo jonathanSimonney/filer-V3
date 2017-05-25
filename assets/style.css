@@ -408,6 +408,9 @@ html body #main_container .home_container_desktop .sidebar .tree .nav a .fa-care
 html body #main_container .home_container_desktop .sidebar .tree .nav a .fa-folder {
   margin: 0 10px;
 }
+html body #main_container .home_container_desktop .sidebar .tree .nav a:hover {
+  text-decoration: none;
+}
 html body #main_container .home_container_desktop .sidebar .tree .nav:hover, html body #main_container .home_container_desktop .sidebar .tree .nav:focus {
   background-color: #364851;
   border-right: 5px solid #ff4c0a;
@@ -487,6 +490,9 @@ html body #main_container .home_container_desktop .main_content .rows_container 
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row div {
   padding: 5px 2px 2px 10px;
+}
+html body #main_container .home_container_desktop .main_content .rows_container .row div a {
+  color: #364851;
 }
 html body #main_container .home_container_desktop .main_content .rows_container .row .options {
   display: flex;
