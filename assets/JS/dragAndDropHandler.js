@@ -9,11 +9,7 @@ function addClassName(element, className) {
 }
 
 function getId(element){
-    for (var i in element.childNodes){
-        if (element.childNodes[i].name === 'notForUser'){
-            return element.childNodes[i].value;
-        }
-    }
+    return $(element).closest('.draggableElem').attr('id');
 }
 
 function dragFileOrFolder(draggedElement, e){
@@ -23,7 +19,7 @@ function dragFileOrFolder(draggedElement, e){
 
 function linkFolderDragAndDropEvent(folder) {
     folder.addEventListener('dragover', function (e) {
-        if (getId(folder) !== idMovedElement){
+        if (getId(folder) !== idMovedElement && idMovedElement !==0){
             e.preventDefault();
             addClassName(this, 'dragover');
         }
@@ -35,7 +31,10 @@ function linkFolderDragAndDropEvent(folder) {
 
     folder.addEventListener('drop', function () {
         this.className = this.className.replace('dragover', '');
-        moveAIntoB(idMovedElement, getId(this));
+        if (idMovedElement !== 0)//idMovedElement = 0 when it is text which is moved.
+        {
+            moveAIntoB(idMovedElement, getId(this));
+        }
     })
 }
 
@@ -51,7 +50,10 @@ function linkArrowDragAndDropEvent(arrow) {
 
     arrow.addEventListener('drop', function () {
         this.className = this.className.replace('dragover', '');
-        moveAIntoB(idMovedElement, 'precedent');
+        if (idMovedElement !== 0)//idMovedElement = 0 when it is text which is moved.
+        {
+            moveAIntoB(idMovedElement, 'precedent');
+        }
     })
 }
 

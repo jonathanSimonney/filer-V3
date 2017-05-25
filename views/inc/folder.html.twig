@@ -27,14 +27,16 @@
     </form>
 </div>-->
 
-<div class="row folder" id="{{ folder['id'] }}">
+<div class="row folder draggableElem" id="{{ folder['id'] }}">
     <div class="col-1">
         <p><i class="fa fa-folder"></i></p>
     </div>
     <div class="col-2">
+<<<<<<< HEAD
         <a href="?action=open&fileId={{ folder['id'] }}" class="download clickable">
             <p>{{ folder['name']|slice(start,15) }}</p>
         </a>
+>>>>>>> 1bdb93a7cd4a949c06e869f9da82c859a81f6b31
     </div>
     <div class="col-2">
         <p class="fileSize"></p>
