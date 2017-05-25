@@ -69,7 +69,7 @@ function asynchronousTreatment(path, successFunction, failureFunction, method){
 }
 
 function linkUploadEvent() {
-    $('.uploadForm').change(function() {
+    $('#file_upload').change(function() {
         $('body').addClass('modal-open');
         $('#modal_upload_content').addClass('modal-backdrop fade show');
         $('#myModal').addClass('show');
@@ -80,6 +80,7 @@ function linkUploadEvent() {
 
             var fileNameModale = $('#fileNameModale').val();
             $('.uploadForm').find('#fileName').val(fileNameModale);
+            console.log($('.uploadForm'));
             $('.uploadForm').submit();
         });
     });
