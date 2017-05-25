@@ -131,17 +131,9 @@ window.onload = function(){
         }
     }
 
-    for (var i in buttonShowing){
-        if (typeof buttonShowing[i].style !== 'undefined'){
-            buttonShowing[i].onclick = function (e) {
-                e.preventDefault();
-                showInFullScreen(this.parentNode);
-            }
-        }
-    }
-
     $('.show').click(function (e) {
         e.preventDefault();
-
+        console.log(this.href);
+        showInFullScreen(this.href);
     })
 };

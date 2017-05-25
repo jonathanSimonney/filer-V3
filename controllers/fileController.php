@@ -152,7 +152,7 @@ class fileController extends BaseController
         http_response_code(400);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            if ($this->userManager->userCanAccess($fileData)){
+            if ($this->securityManager->userCanAccess($fileData)){
                 if (!$fileData['isFolder']){
                     http_response_code(200);
 

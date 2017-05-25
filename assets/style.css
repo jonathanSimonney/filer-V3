@@ -429,3 +429,54 @@ html {
           border-left: 2px solid #cfd8dc; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+.fullScreen{
+  background-color: rgba(224, 230, 227, 0.9);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullScreen>div{
+  height: 90vh;
+  width:70vw;
+  border: 2px #5e4126 dotted;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.fullScreen>div>p{
+  overflow:auto;
+  height:80vh;
+  background-color: #fff;
+}
+
+.fullScreen>div>p>pre{
+  width:99%;
+  height:99%;
+  margin:auto;
+}
+
+.changeAllowed>pre{
+  border:1px solid #5679ff;
+}
+
+.closeButton {
+  color: black;
+  font-size: 40px;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 0 0;
+}

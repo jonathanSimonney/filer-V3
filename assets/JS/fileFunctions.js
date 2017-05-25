@@ -240,8 +240,9 @@ function getDivInModale(fileData){
     }
 }
 
-function showInFullScreen(fileId){
-    asynchronousTreatment('?action=show&id='+fileId, function(request){
+function showInFullScreen(requestPath){
+    asynchronousTreatment(requestPath, function(request){
+        //$('#debug').html(request.responseText);
         var fileData = JSON.parse(request.responseText);
         var fullScreenDiv = createElementWithClass('div', ['fullScreen']);
         addCloseButton(fullScreenDiv);
