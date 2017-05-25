@@ -259,7 +259,8 @@ class FileManager extends BaseManager
 
         if ($this->uploadFileInFolder($file, $path)){
             $fileInformations['date'] = date("Y-m-d H:i:s");
-            $fileInformations['isFolder'] = false;
+            $fileInformations['isFolder'] = (int)false;//workaround for newer version of mySQL, who don't like the empty string,
+            // but convert anything given to execute to a string representation. Problem is that string representation of false is '', which generates warning from mySQL...
             $this->uploadFileInDb($fileInformations);
             $this->sessionManager->uploadFileInSession($fileInformations);
         }
@@ -268,7 +269,8 @@ class FileManager extends BaseManager
     public function addFolder($folderInformations){
         mkdir($this->getRealPathToFile($folderInformations));
         $folderInformations['date'] = date('Y-m-d H:i:s');
-        $folderInformations['isFolder'] = true;
+        $folderInformations['isFolder'] = (int)true;//workaround for newer version of mySQL, who don't like the empty string,
+        // but convert anything given to execute to a string representation. Problem is that string representation of false is '', which generates warning from mySQL...
         $this->uploadFileInDb($folderInformations);
         $this->sessionManager->uploadFileInSession($folderInformations);
     }

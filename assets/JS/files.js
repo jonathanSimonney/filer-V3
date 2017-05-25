@@ -122,4 +122,9 @@ window.onload = function(){
             }
         }
     }
-}
+
+    $('.show').click(function (e) {
+        e.preventDefault();
+
+    })
+};

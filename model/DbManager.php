@@ -63,6 +63,7 @@ class DbManager extends BaseManager
         }
         $sth = $dbh->prepare($query);
         $sth->execute($data);
+        //echo ($query. '<br>'. $data);
         return true;
     }
 

@@ -196,17 +196,8 @@ function getDivInModale(fileData){
     }
 }
 
-function showInFullScreen(elementToShow){
-    for (var i in elementToShow.childNodes){
-        if (elementToShow.childNodes[i].className !== undefined){
-            if (elementToShow.childNodes[i].hasClassName('name')){
-                openedFileId = getId(elementToShow.childNodes[i]);
-                break;
-            }
-        }
-    }
-
-    asynchronousTreatment('?action=show&id='+openedFileId, function(request){
+function showInFullScreen(fileId){
+    asynchronousTreatment('?action=show&id='+fileId, function(request){
         var fileData = JSON.parse(request.responseText);
         var fullScreenDiv = createElementWithClass('div', ['fullScreen']);
         addCloseButton(fullScreenDiv);

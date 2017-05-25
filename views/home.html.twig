@@ -88,7 +88,7 @@
                     {% set numberForId = 0 %}
                     {% for key, element in arrayElement %}
                         {% set numberForId = numberForId + 1 %}
-                        {% if element['type'] == ''%}{# to change, because some file don't have any extension.#}
+                        {% if element['isFolder'] %}{# to change, because some file don't have any extension.#}
                             {% include 'inc/folder.html.twig' with {'folder':element} %}
                         {% else %}
                             {% include 'inc/file.html.twig' with {'file':element} %}
