@@ -91,7 +91,6 @@ function linkUploadEvent() {
 
             var fileNameModale = $('#fileNameModale').val();
             $('.uploadForm').find('#fileName').val(fileNameModale);
-            console.log($('.uploadForm'));
             $('.uploadForm').submit();
         });
     });
@@ -199,7 +198,6 @@ function allowModif(textField, button){
     textField.childNodes[0].focus();
     addClassName(textField, 'changeAllowed');
     button.onclick = function () {
-        console.log(textField.childNodes[0].innerText);
         writeInFile(openedFileId, textField.childNodes[0].innerText);
     }
 }
@@ -305,6 +303,5 @@ function showInFullScreen(requestPath){
         fullScreenDiv.appendChild(childDiv);
         document.body.appendChild(fullScreenDiv);
     }, function (request) {
-        console.log(request.status);
     }, 'POST');
 }
