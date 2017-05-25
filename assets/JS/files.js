@@ -34,6 +34,14 @@ window.onload = function(){
         linkArrowDragAndDropEvent(precedent);
     }
 
+    $.each($('.upload_label'), function () {
+        linkUploadEvent();
+    });
+
+    $.each($('.addFolder_label'), function () {
+        linkAddFolderEvent();
+    });
+
     $.each($('.file'), function (index, value) {
         linkFileEvent(value.id);
     });

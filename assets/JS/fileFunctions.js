@@ -25,15 +25,13 @@ function linkButtonOnclickEvent(button){
 
 function buttonInit(elementToAppend){
     var button = {};
-    button.domElement = createElementWithClass('span', ['closeButton']);
+    button.domElement = createElementWithClass('i', ['closeButton fa fa-times']);
     button.father = elementToAppend;
 
     return button;
 }
 
 function buttonDisplay(button) {
-    button.domElement.innerHTML = 'x';
-
     button.father.appendChild(button.domElement);
 
     if (window.getComputedStyle(button.father).getPropertyValue('position') === 'static'){
@@ -68,6 +66,40 @@ function asynchronousTreatment(path, successFunction, failureFunction, method){
         }
     };
     request.send();
+}
+
+function linkUploadEvent() {
+    $('.uploadForm').change(function() {
+        $('body').addClass('modal-open');
+        $('#modal_upload_content').addClass('modal-backdrop fade show');
+        $('#myModal').addClass('show');
+        $('#myModal').css('display','block');
+        $('.modal-body').html("<input id='fileNameModale' type='text' name='name' placeholder=' type here the name of your file'>");
+
+        $('.btn-confirm').click(function(){
+
+            var fileNameModale = $('#fileNameModale').val();
+            $('.uploadForm').find('#fileName').val(fileNameModale);
+            $('.uploadForm').submit();
+        });
+    });
+}
+
+function linkAddFolderEvent() {
+    $('.addFolder_label').click(function() {
+        $('body').addClass('modal-open');
+        $('#modal_upload_content').addClass('modal-backdrop fade show');
+        $('#myModal').addClass('show');
+        $('#myModal').css('display','block');
+        $('.modal-body').html("<input id='folderNameModale' type='text' name='name' placeholder=' type here the name of your folder'>");
+
+        $('.btn-confirm').click(function(){
+
+            var folderNameModale = $('#folderNameModale').val();
+            $('.addFolder').find('#folderName').val(folderNameModale);
+            $('.addFolder').submit();
+        });
+    });
 }
 
 function linkFolderEvent(folderId) {

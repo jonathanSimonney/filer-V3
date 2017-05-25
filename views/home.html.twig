@@ -30,13 +30,14 @@
             <div class="new_menu">
                 <button class="new_button dropbtn" onclick="toggleMenu()"><i class="fa fa-plus"></i>NEW</button>
                 <div class="myDropdown dropdown-content">
-                    <form id="form_upload" method="POST" action="?action=upload" enctype="multipart/form-data">
-                        <input type="file" name="user_file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
-                        <label for="file_upload"><i class="fa fa-upload"></i><span>Upload a file</span></label>
+                    <form id="form_upload" class="uploadForm" method="POST" action="?action=upload" enctype="multipart/form-data" name="uploadFile">
+                        <input type="file" name="file" id="file_upload" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple>
+                        <input id="fileName" class="toHide" type="text" name="name" placeholder="type here the name of your file">
+                        <label class="upload_label" for="file_upload"><i class="fa fa-upload"></i><span>Upload a file</span></label>
                     </form>
-                    <form id="form_upload" method="POST" action="?action=folder" enctype="multipart/form-data">
-                        <button name="user_file" id="folder_upload" class="inputfile inputfile-1"></button>
-                        <label for="folder_upload"><i class="fa fa-folder"></i><span>Create a folder</span></label>
+                    <form id="form_upload" class="addFolder" method="POST" action="?action=addFolder" name="addFolder">
+                        <input id="folderName" class="toHide" type="text" name="name" placeholder="type here the name of your folder">
+                        <label class="addFolder_label" for="folder_upload"><i class="fa fa-folder"></i><span>Create a folder</span></label>
                     </form>
                 </div>
             </div>
