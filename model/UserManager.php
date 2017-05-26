@@ -90,6 +90,10 @@ class UserManager extends BaseManager
         $_SESSION['currentUser']['data'] = $data;
         //var_dump($_SESSION['files']);
         $_SESSION['files'] = $this->dbManager->getWhatHow($_SESSION['currentUser']['data']['id'],'user_id','files');
+        foreach ($_SESSION['files'] as &$file)
+        {
+            $file['isFolder'] = (int)$file['isFolder'];
+        }
         $_SESSION['files'] = $this->makeInferiorKeyIndex($_SESSION['files'], 'id');
         //var_dump($_SESSION['files']);
         $this->sessionManager->formatSessionFileAsTree();

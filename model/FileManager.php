@@ -36,7 +36,7 @@ class FileManager extends BaseManager
 
         if ($_SESSION['location']['files'] !== null){
             foreach ($_SESSION['location']['files'] as $key => $value){
-                if ($value['isFolder']){
+                if ((bool)$value['isFolder']){
                     $this->suppressRecursively($value);
                 }else{
                     unlink($this->getRealPathToFile($value));
@@ -92,7 +92,7 @@ class FileManager extends BaseManager
     }
 
     public function suppressFile($fileData){
-        if (!$fileData['isFolder']){
+        if (!(bool)$fileData['isFolder']){
             unlink($this->getRealPathToFile($fileData));
             $this->dbManager->removeFromDb('files',$fileData['id']);
         }else{
@@ -104,7 +104,7 @@ class FileManager extends BaseManager
 
     public function formatNewFileData($oldFileData){
         $newFileData['name'] = $this->formatFileName($_POST['name'], $oldFileData['type']);
-        if ($oldFileData['isFolder']){
+        if ((bool)$oldFileData['isFolder']){
             $newFileData['path'] = preg_replace('/'.preg_quote($oldFileData['name'], NULL).'(?!.)/', $newFileData['name'], $oldFileData['path']);
         }else{
             //following regexp is supposed to select the oldFileName only if it is followed by its type with nothing behind.
@@ -286,7 +286,7 @@ class FileManager extends BaseManager
 
     public function getNameWithExtent($fileOrFolderData){
         $name = $fileOrFolderData['name'];
-        if (!$fileOrFolderData['isFolder']){
+        if (!(bool)$fileOrFolderData['isFolder']){
             $name .= '.'.$fileOrFolderData['type'];
         }
 
@@ -298,7 +298,7 @@ class FileManager extends BaseManager
         $arrayFolders = [];
 
         foreach ($arrayToOrder as $key => $value){
-            if ($value['isFolder']){
+            if ((bool)$value['isFolder']){
                 $arrayFolders[] = $value;
             }else{
                 $value['filesize'] = filesize($this->getRealPathToFile($value));
