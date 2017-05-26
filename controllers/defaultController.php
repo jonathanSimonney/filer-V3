@@ -27,7 +27,6 @@ class defaultController extends BaseController
 
 
         if ($arrayElements !== null){
-            var_dump($arrayElements, $_SESSION);
             $arrayElements = $this->fileManager->orderBetweenFilesAndFolder($arrayElements);
         }
         else
