@@ -153,7 +153,7 @@ class fileController extends BaseController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             if ($this->securityManager->userCanAccess($fileData)){
-                if (!$fileData['isFolder']){
+                if (!(bool)$fileData['isFolder']){
                     http_response_code(200);
 
                     $ret = json_encode([
@@ -171,7 +171,7 @@ class fileController extends BaseController
             }
         }else{
             if ($this->securityManager->userCanAccess($fileData)){
-                if (!$fileData['isFolder']){
+                if (!(bool)$fileData['isFolder']){
                     $path = $this->fileManager->getRealPathToFile($fileData);
                     http_response_code(200);
                     $this->fileManager->setCorrectHeader($fileData['type']);
